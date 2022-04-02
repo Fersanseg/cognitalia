@@ -1,0 +1,19 @@
+.footer {
+    background-color: black;
+    color: white;
+    height: 20rem;
+    display: flex;
+
+    &__L,
+    &__R {
+        flex: 1 0 auto;
+        margin: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &_legal {
+        margin-top: 2rem;
+    }
+}

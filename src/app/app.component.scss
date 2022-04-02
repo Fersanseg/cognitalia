@@ -1,0 +1,13 @@
+.body_content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app_main {
+    flex-grow: 1;
+}
+
+.app_footer {
+    // flex-shrink: 0;
+}
