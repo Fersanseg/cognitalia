@@ -1,0 +1,34 @@
+{
+    "tests": [
+        {
+            "id": 1,
+            "title": "Tiempo de reacción",
+            "description": "Mide tus reflejos"
+        },
+        {
+            "id": 2,
+            "title": "Memoria numérica",
+            "description": "Comprueba cuántas cifras puedes recordar a la vez"
+        },
+        {
+            "id": 3,
+            "title": "Memoria verbal",
+            "description": "Recuerda la mayor cantidad de palabras posible"
+        },
+        {
+            "id": 4,
+            "title": "Memoria visual",
+            "description": "Recuerda un tablero cada vez más grande"
+        },
+        {
+            "id": 5,
+            "title": "Velocidad de escritura",
+            "description": "Mide cuántas palabras puedes escribir por minuto"
+        },
+        {
+            "id": 6,
+            "title": "Test de Stroop",
+            "description": "Comprueba si eres capaz de ignorar estímulos conflictivos"
+        }
+    ]
+}
