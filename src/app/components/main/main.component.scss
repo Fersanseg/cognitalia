@@ -4,24 +4,4 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
-    &__testBox {
-        width: 30rem;
-        height: 30rem;
-        background-color: rgba(0, 0, 0, 0.062);
-        margin: 3rem 3rem;
-        transition: 0.2s;
-
-        &:hover {
-            transform: scale(1.05) translateY(-0.5rem);
-            box-shadow: 0 0.5rem 2rem 0.2rem rgba(0, 0, 0, 0.26);
-            background-color: rgba(0, 0, 0, 0.151);
-        }
-
-        &:active {
-            transform: scale(1.05) translateY(0.5rem);
-            box-shadow: 0 0.5rem 0.5rem 0.05rem rgba(0, 0, 0, 0.26);
-            background-color: rgba(0, 0, 0, 0.151);
-        }
-    }
 }
