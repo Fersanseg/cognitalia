@@ -2,5 +2,6 @@
         <app-main-test
             *ngFor="let test of tests"
             [test]="test"
+            (click)="onClick(test.title)"
         ></app-main-test>
 </div>

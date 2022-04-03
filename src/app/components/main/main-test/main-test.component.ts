@@ -8,7 +8,6 @@ import { ITest } from 'src/app/ITest';
 })
 export class MainTestComponent implements OnInit {
   @Input() test!: ITest;
-  // icons?: string[] = this.test.icon;
 
   constructor() { }
 

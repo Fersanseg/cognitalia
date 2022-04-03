@@ -15,4 +15,10 @@
     & h3 {
         margin-bottom: 4rem;
     }
+
+    & a:link,
+    & a:visited {
+        text-decoration: none;
+        color: inherit;
+    }
 }
