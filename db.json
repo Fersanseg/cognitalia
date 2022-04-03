@@ -3,32 +3,54 @@
         {
             "id": 1,
             "title": "Tiempo de reacción",
-            "description": "Mide tus reflejos"
+            "description": "Mide tus reflejos",
+            "icon": [
+                "./assets/clock-regular.svg"
+            ]
         },
         {
             "id": 2,
             "title": "Memoria numérica",
-            "description": "Comprueba cuántas cifras puedes recordar a la vez"
+            "description": "Comprueba cuántas cifras puedes recordar a la vez",
+            "icon": [
+                "./assets/1-solid.svg",
+                "./assets/2-solid.svg",
+                "./assets/3-solid.svg"
+            ]
         },
         {
             "id": 3,
             "title": "Memoria verbal",
-            "description": "Recuerda la mayor cantidad de palabras posible"
+            "description": "Recuerda la mayor cantidad de palabras posible",
+            "icon": [
+                "./assets/h-solid.svg",
+                "./assets/i-solid.svg",
+                "./assets/exclamation-solid.svg"
+            ]
         },
         {
             "id": 4,
             "title": "Memoria visual",
-            "description": "Recuerda un tablero cada vez más grande"
+            "description": "Recuerda un tablero cada vez más grande",
+            "icon": [
+                "./assets/table-cells-solid.svg"
+            ]
         },
         {
             "id": 5,
             "title": "Velocidad de escritura",
-            "description": "Mide cuántas palabras puedes escribir por minuto"
+            "description": "Mide cuántas palabras puedes escribir por minuto",
+            "icon": [
+                "./assets/keyboard-solid.svg"
+            ]
         },
         {
             "id": 6,
             "title": "Test de Stroop",
-            "description": "Comprueba si eres capaz de ignorar estímulos conflictivos"
+            "description": "Comprueba si eres capaz de ignorar estímulos conflictivos",
+            "icon": [
+                "./assets/palette-solid.svg"
+            ]
         }
     ]
 }

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { ITest } from 'src/app/ITest';
 
 @Component({
@@ -9,8 +8,7 @@ import { ITest } from 'src/app/ITest';
 })
 export class MainTestComponent implements OnInit {
   @Input() test!: ITest;
-  // @Input() title!:string;
-  // @Input() description!:string;
+  // icons?: string[] = this.test.icon;
 
   constructor() { }
 
