@@ -25,6 +25,21 @@ export class MainComponent implements OnInit {
       case "Tiempo de reacción":
         this.router.navigateByUrl("/tiempo-reaccion");
         break;
+      case "Memoria numérica":
+        this.router.navigateByUrl("/memoria-numerica");
+        break;
+      case "Memoria verbal":
+        this.router.navigateByUrl("/memoria-verbal");
+        break;
+      case "Memoria visual":
+        this.router.navigateByUrl("/memoria-visual");
+        break;
+      case "Velocidad de escritura":
+        this.router.navigateByUrl("/velocidad-escritura");
+        break;
+      case "Test de Stroop":
+        this.router.navigateByUrl("/stroop");
+        break;
       default: 
         console.log("error");
     }

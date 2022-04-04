@@ -11,10 +11,20 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { MainTestComponent } from './components/main/main-test/main-test.component';
 import { TiempoReaccionComponent } from './components/main/tiempo-reaccion/tiempo-reaccion.component';
+import { MemoriaNumericaComponent } from './components/main/memoria-numerica/memoria-numerica.component';
+import { MemoriaVerbalComponent } from './components/main/memoria-verbal/memoria-verbal.component';
+import { MemoriaVisualComponent } from './components/main/memoria-visual/memoria-visual.component';
+import { VelocidadEscrituraComponent } from './components/main/velocidad-escritura/velocidad-escritura.component';
+import { StroopComponent } from './components/main/stroop/stroop.component';
 
 const appRoutes: Routes = [
   {path: "", component: MainComponent},
-  {path: "tiempo-reaccion", component: TiempoReaccionComponent}
+  {path: "tiempo-reaccion", component: TiempoReaccionComponent},
+  {path: "memoria-numerica", component: MemoriaNumericaComponent},
+  {path: "memoria-verbal", component: MemoriaVerbalComponent},
+  {path: "memoria-visual", component: MemoriaVisualComponent},
+  {path: "velocidad-escritura", component: VelocidadEscrituraComponent},
+  {path: "stroop", component: StroopComponent},
 ]
 
 @NgModule({
@@ -25,7 +35,12 @@ const appRoutes: Routes = [
     FooterComponent,
     MainComponent,
     MainTestComponent,
-    TiempoReaccionComponent
+    TiempoReaccionComponent,
+    MemoriaNumericaComponent,
+    MemoriaVerbalComponent,
+    MemoriaVisualComponent,
+    VelocidadEscrituraComponent,
+    StroopComponent
   ],
   imports: [
     BrowserModule,
