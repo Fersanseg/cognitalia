@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output } from '@angular/core';
+import { NavigationBehaviorOptions, NavigationExtras, Router } from '@angular/router';
 import { ITest } from 'src/app/ITest';
 import { TestsService } from 'src/app/services/tests.service';
 
@@ -17,13 +17,15 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.testsService.getTests().subscribe(tests => this.tests = tests);
+    this.testsService.getTests().subscribe((tests) => {
+      this.tests = tests;
+    });
   }
 
   onClick(pageUrl: string) {
     switch(pageUrl) {
       case "Tiempo de reacción":
-        this.router.navigateByUrl("/tiempo-reaccion");
+        this.router.navigateByUrl("/tiempo-reaccion", {state: {descriptionOfTest: this.tests[0].description}});
         break;
       case "Memoria numérica":
         this.router.navigateByUrl("/memoria-numerica");

@@ -1,0 +1,11 @@
+<div class="testContainer">
+    <div class="testWindow">
+        <app-test-tr
+            *ngIf="hasRoute('/tiempo-reaccion')"
+        ></app-test-tr>
+        <app-test-mnum
+            *ngIf="hasRoute('/memoria-numerica')"
+        ></app-test-mnum>
+    </div>
+</div>
+

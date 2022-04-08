@@ -16,6 +16,9 @@ import { VelocidadEscrituraComponent } from './pages/tests/velocidad-escritura/v
 import { StroopComponent } from './pages/tests/stroop/stroop.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TestBoxComponent } from './components/test-box/test-box.component';
+import { TestWindowComponent } from './components/test-window/test-window.component';
+import { TestTRComponent } from './tests/test-tr/test-tr.component';
+import { TestMNumComponent } from './tests/test-mnum/test-mnum.component';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
@@ -40,7 +43,10 @@ const appRoutes: Routes = [
     VelocidadEscrituraComponent,
     StroopComponent,
     HomeComponent,
-    TestBoxComponent
+    TestBoxComponent,
+    TestWindowComponent,
+    TestTRComponent,
+    TestMNumComponent,
   ],
   imports: [
     BrowserModule,

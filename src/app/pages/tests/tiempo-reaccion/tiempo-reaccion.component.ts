@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tiempo-reaccion',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tiempo-reaccion.component.scss']
 })
 export class TiempoReaccionComponent implements OnInit {
+  testDescription!: string; 
 
-  constructor() { }
-
+  constructor() {}
+  
   ngOnInit(): void {
+    this.testDescription = history.state.descriptionOfTest;
   }
 
 }
