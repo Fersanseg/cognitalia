@@ -4,11 +4,11 @@ import { ITest } from 'src/app/ITest';
 import { TestsService } from 'src/app/services/tests.service';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class MainComponent implements OnInit {
+export class HomeComponent implements OnInit {
   tests: ITest[] = [];
 
   constructor(

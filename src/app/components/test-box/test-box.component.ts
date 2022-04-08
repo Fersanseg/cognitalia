@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ITest } from 'src/app/ITest';
 
 @Component({
-  selector: 'app-main-test',
-  templateUrl: './main-test.component.html',
-  styleUrls: ['./main-test.component.scss']
+  selector: 'app-test-box',
+  templateUrl: './test-box.component.html',
+  styleUrls: ['./test-box.component.scss']
 })
-export class MainTestComponent implements OnInit {
+export class TestBoxComponent implements OnInit {
   @Input() test!: ITest;
 
   constructor() { }

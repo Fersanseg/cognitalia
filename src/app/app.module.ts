@@ -8,17 +8,17 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MainComponent } from './components/main/main.component';
-import { MainTestComponent } from './components/main/main-test/main-test.component';
-import { TiempoReaccionComponent } from './components/main/tiempo-reaccion/tiempo-reaccion.component';
-import { MemoriaNumericaComponent } from './components/main/memoria-numerica/memoria-numerica.component';
-import { MemoriaVerbalComponent } from './components/main/memoria-verbal/memoria-verbal.component';
-import { MemoriaVisualComponent } from './components/main/memoria-visual/memoria-visual.component';
-import { VelocidadEscrituraComponent } from './components/main/velocidad-escritura/velocidad-escritura.component';
-import { StroopComponent } from './components/main/stroop/stroop.component';
+import { TiempoReaccionComponent } from './pages/tests/tiempo-reaccion/tiempo-reaccion.component';
+import { MemoriaNumericaComponent } from './pages/tests/memoria-numerica/memoria-numerica.component';
+import { MemoriaVerbalComponent } from './pages/tests/memoria-verbal/memoria-verbal.component';
+import { MemoriaVisualComponent } from './pages/tests/memoria-visual/memoria-visual.component';
+import { VelocidadEscrituraComponent } from './pages/tests/velocidad-escritura/velocidad-escritura.component';
+import { StroopComponent } from './pages/tests/stroop/stroop.component';
+import { HomeComponent } from './pages/home/home.component';
+import { TestBoxComponent } from './components/test-box/test-box.component';
 
 const appRoutes: Routes = [
-  {path: "", component: MainComponent},
+  {path: "", component: HomeComponent},
   {path: "tiempo-reaccion", component: TiempoReaccionComponent},
   {path: "memoria-numerica", component: MemoriaNumericaComponent},
   {path: "memoria-verbal", component: MemoriaVerbalComponent},
@@ -33,14 +33,14 @@ const appRoutes: Routes = [
     HeaderComponent,
     ButtonComponent,
     FooterComponent,
-    MainComponent,
-    MainTestComponent,
     TiempoReaccionComponent,
     MemoriaNumericaComponent,
     MemoriaVerbalComponent,
     MemoriaVisualComponent,
     VelocidadEscrituraComponent,
-    StroopComponent
+    StroopComponent,
+    HomeComponent,
+    TestBoxComponent
   ],
   imports: [
     BrowserModule,
