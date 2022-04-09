@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { getTestDescriptionFromStorage } from 'src/app/utils/functions/getDescription';
 
 @Component({
   selector: 'app-tiempo-reaccion',
@@ -7,12 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./tiempo-reaccion.component.scss']
 })
 export class TiempoReaccionComponent implements OnInit {
-  testDescription!: string; 
+  testDescription!: string|null; 
 
   constructor() {}
   
   ngOnInit(): void {
-    this.testDescription = history.state.descriptionOfTest;
+    this.getDescription();
   }
-
+  
+  // Gets the test description from the browser's sessionStorage
+  private getDescription(): void {
+    this.testDescription = getTestDescriptionFromStorage();
+  }
 }

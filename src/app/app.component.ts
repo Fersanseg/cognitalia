@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,19 @@ import { NavigationStart, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'cognitalia';
+
+  constructor(public router: Router) {
+    this.clearBrowserStorage();
+  }
+
+  // Clears the browser sessionStorage when browsing to the home page
+  private clearBrowserStorage(): void {
+    this.router.events.subscribe(ev => {
+      if(ev instanceof NavigationEnd) {
+        if(ev.urlAfterRedirects === '/') {
+          sessionStorage.clear();
+        }
+      }
+    })
+  }
 }

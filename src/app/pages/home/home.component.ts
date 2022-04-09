@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl("/tiempo-reaccion", {state: {descriptionOfTest: this.tests[0].description}});
         break;
       case "Memoria numérica":
-        this.router.navigateByUrl("/memoria-numerica");
+        this.router.navigateByUrl("/memoria-numerica", {state: {descriptionOfTest: this.tests[1].description}});
         break;
       case "Memoria verbal":
         this.router.navigateByUrl("/memoria-verbal");
