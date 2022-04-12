@@ -1,5 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { NavigationBehaviorOptions, NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ITest } from 'src/app/ITest';
 import { TestsService } from 'src/app/services/tests.service';
 
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
         this.router.navigateByUrl("/memoria-numerica", {state: {descriptionOfTest: this.tests[1].description}});
         break;
       case "Memoria verbal":
-        this.router.navigateByUrl("/memoria-verbal");
+        this.router.navigateByUrl("/memoria-verbal", {state: {descriptionOfTest: this.tests[2].description}});
         break;
       case "Memoria visual":
         this.router.navigateByUrl("/memoria-visual");
