@@ -1,13 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { getTestDescriptionFromStorage } from 'src/app/utils/functions/getDescription';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { getTestDescriptionFromStorage  } from 'src/app/utils/functions/getDescription';
 
 @Component({
   selector: 'app-tiempo-reaccion',
   templateUrl: './tiempo-reaccion.component.html',
-  styleUrls: ['./tiempo-reaccion.component.scss']
+  styleUrls: ['./tiempo-reaccion.component.scss'],
+  encapsulation: ViewEncapsulation.None // Need to disable Angular's Cross-site Scripting to style our testData resource
 })
 export class TiempoReaccionComponent implements OnInit {
-  testDescription!: string|null; 
+  testDescription!: string;
 
   constructor() {}
   

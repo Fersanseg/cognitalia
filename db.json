@@ -7,7 +7,7 @@
             "icon": [
                 "./assets/clock-regular.svg"
             ],
-            "description": "<p>¿Cómo de rápido crees que eres capaz de reaccionar a un estímulo?</p> En este test tendrás que observar con detenimiento tu pantalla y hacer click en el área del test en cuanto el color rojo cambie a verde, lo más rápido que puedas. Pero ten cuidado: si haces click antes de tiempo, tu prueba quedará anulada."
+            "description": "<h3>¿Cómo de rápido crees que eres capaz de reaccionar a un estímulo?</h3><p>En este test tendrás que observar con detenimiento tu pantalla y hacer click en el área del test en cuanto el color rojo cambie a verde, lo más rápido que puedas. Pero ten cuidado: si haces click antes de tiempo, tu prueba quedará anulada.</p><p>La prueba mide el tiempo que transcurre entre que el estímulo ocurre hasta que tu cerebro lo procesa, envía la señal de hacer click a tu mano, y los músculos de tus dedos ejecutan la orden.</p><p>El tiempo de reacción más rápido registrado es de 120ms, mientras que el tiempo promedio es de alrededor de 250ms, y no es raro obtener algo menos de 200ms o más de 300ms.</p>"
         },
         {
             "id": 2,
