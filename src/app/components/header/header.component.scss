@@ -1,5 +1,7 @@
+@import '../../utils/variables.scss';
+
 .app-header {
-    background-color: rgba(0, 255, 106, 0.281);
+    background-color: $light-blue;
     display:flex;
     flex-direction: column;
     align-items: center;
