@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Observer } from 'rxjs';
+import { TrService } from 'src/app/services/tr.service';
 
 @Component({
   selector: 'app-test-tr',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test-tr.component.scss']
 })
 export class TestTRComponent implements OnInit {
+  observable!: Observable<number>;
 
-  constructor() { }
-
+  constructor(private trService: TrService) {
+  }
+  
   ngOnInit(): void {
+    this.observable = this.trService.getCount();
   }
 
+  increaseCounter() {
+    this.trService.increment();
+  }
 }
