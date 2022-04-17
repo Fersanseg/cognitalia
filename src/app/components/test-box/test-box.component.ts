@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITest } from 'src/app/ITest';
+import { ITest } from 'src/app/utils/interfaces/ITest';
 
 @Component({
   selector: 'app-test-box',

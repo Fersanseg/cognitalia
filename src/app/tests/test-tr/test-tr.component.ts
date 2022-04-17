@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscriber, Subscription } from 'rxjs';
 import { TrService } from 'src/app/services/tr.service';
+import { IHeading } from 'src/app/utils/interfaces/iheading';
 
 @Component({
   selector: 'app-test-tr',
@@ -8,16 +9,30 @@ import { TrService } from 'src/app/services/tr.service';
   styleUrls: ['./test-tr.component.scss']
 })
 export class TestTRComponent implements OnInit {
-  observable!: Observable<number>;
+  textSubscription!:Subscription;
+  stateSubscription!:Subscription;
 
-  constructor(private trService: TrService) {
+  title!:string;
+  subtitle!:string;
+  state!:string;
+
+  constructor(private trService:TrService) {
   }
-  
+
   ngOnInit(): void {
-    this.observable = this.trService.getCount();
+    this.textSubscription = this.trService.getHeading().subscribe(r => {
+      this.title = r.title;
+      this.subtitle = r.subtitle;
+    });
+
+    this.stateSubscription = this.trService.getCurrentState().subscribe(s => this.state = s);
   }
 
-  increaseCounter() {
-    this.trService.increment();
+  handleStateChange() {
+    this.trService.handleStateChange();
+  }
+
+  ngOnDestroy(): void {
+    this.textSubscription.unsubscribe();
   }
 }

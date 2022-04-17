@@ -1,5 +1,8 @@
-<div class="trBox"
-    (click)="increaseCounter()"
+<div 
+    class="trBox"
+    [ngClass]="state"
+    (click)="handleStateChange()"
 >
-    {{ observable | async }}
+    {{title}}
+    {{subtitle}}
 </div>

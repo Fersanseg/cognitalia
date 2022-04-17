@@ -1,8 +1,19 @@
 @import '../../utils/variables.scss';
 
 .trBox {
-    background-color: $light-blue;
     width: 100%;
     min-height: 40rem;
     border-radius: 1rem;
+}
+
+.initState {
+    background-color: $light-blue;
+}
+
+.waitingState {
+    background-color: $light-red;
+}
+
+.answerableState {
+    background-color: $light-green;
 }

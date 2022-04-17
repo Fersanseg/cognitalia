@@ -1,23 +1,51 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { IHeading } from '../utils/interfaces/iheading';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrService {
-  counter:number = 0;
-  subject!: BehaviorSubject<number>;
+  private textSubject!: BehaviorSubject<IHeading>
+  private stateSubject!:BehaviorSubject<string>
+
+  readonly initialHeading:IHeading = {
+    title: "title",
+    subtitle: "subtitle"
+  }
+  readonly initialState:string = "initState";
+
+  /*
+    States:
+    - Initial (didnt click yet)
+    - Testing (waiting for test to turn green)
+    - Answer (test turned green: click now)
+    - Feedback (warning if clicked on Testing, congrats if clicked on Answer; click again for another round)
+  */
 
   constructor() {
-    this.subject = new BehaviorSubject(this.counter);
+    this.textSubject = new BehaviorSubject(this.initialHeading)
+    this.stateSubject = new BehaviorSubject(this.initialState);
   }
 
-  getCount() {
-    return this.subject.asObservable();
+  getHeading() {
+    return this.textSubject.asObservable();
   }
 
-  increment() {
-    this.counter++;
-    this.subject.next(this.counter);
+  getCurrentState() {
+    return this.stateSubject.asObservable();
+  }
+
+  handleStateChange() {
+    if(this.stateSubject.value === "initState") {
+      this.stateSubject.next("waitingState");
+      this.textSubject.next({
+        title: "changed title",
+        subtitle: "changed subtitle"
+      })
+    } else {
+      this.stateSubject.next(this.initialState);
+      this.textSubject.next(this.initialHeading);
+    }
   }
 }

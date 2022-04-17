@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ITest } from 'src/app/ITest';
+import { ITest } from 'src/app/utils/interfaces/ITest';
 import { TestsService } from 'src/app/services/tests.service';
 
 @Component({
