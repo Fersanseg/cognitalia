@@ -34,5 +34,6 @@ export class TestTRComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.textSubscription.unsubscribe();
+    this.stateSubscription.unsubscribe();
   }
 }
