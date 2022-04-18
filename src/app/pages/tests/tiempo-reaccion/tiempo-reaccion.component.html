@@ -1,3 +1,19 @@
-<app-test-description-box></app-test-description-box>
-<app-test-window></app-test-window>
-<div class="testCount">Test nº: {{testCount}}/5</div>
+<div class="TR">
+    <app-test-description-box></app-test-description-box>
+
+    <div class="testCount">
+        Test nº: {{testCount}}/5
+    </div>
+
+    <app-test-tr
+        (generateResults)="generateResults($event)"
+    ></app-test-tr>
+
+    <app-test-results 
+        class="testResults"
+        *ngIf="testCount>=5"
+        [responseTimes]="responseTimes"
+        [averageTimes]="averageTimes"
+        [comparativeResults]="comparativeResults"
+    ></app-test-results>
+</div>

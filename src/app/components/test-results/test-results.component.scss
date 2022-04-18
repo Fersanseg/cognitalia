@@ -1,0 +1,22 @@
+@import '../../utils/variables.scss';
+
+.testResults {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2rem;
+    background-color: $light-gray;
+    border-radius: 1rem;
+    padding: 2rem;
+
+    &__heading {
+        margin-bottom: 2rem;
+    }
+
+    & span {
+
+        &:not(:last-child) {
+            margin-bottom: 3rem;
+        }
+    }
+}

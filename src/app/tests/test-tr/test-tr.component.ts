@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Observer, Subscriber, Subscription } from 'rxjs';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TrService } from 'src/app/services/tr.service';
-import { IHeading } from 'src/app/utils/interfaces/iheading';
 
 @Component({
   selector: 'app-test-tr',
   templateUrl: './test-tr.component.html',
   styleUrls: ['./test-tr.component.scss']
 })
-export class TestTRComponent implements OnInit {
+export class TestTRComponent implements OnInit, OnDestroy {
+  @Output() generateResults = new EventEmitter();
   textSubscription!:Subscription;
   stateSubscription!:Subscription;
   testCountSubscription!:Subscription;
 
   title!:string;
   subtitle!:string;
-  resultCount!:number;
   state!:string;
   testCount!:number;
 
@@ -34,6 +33,15 @@ export class TestTRComponent implements OnInit {
 
   handleStateChange(): void {
     this.trService.handleStateChange();
+    if(this.testCount>=5) {
+      let averageResult = this.trService.getResponseAverage();
+
+      this.generateResults.emit({
+        responseTimes: this.trService.getResponseTimes(),
+        averageTimes: averageResult,
+        comparativeResults: this.trService.evaluateResults(averageResult)
+      });
+    }
   }
 
   ngOnDestroy(): void {

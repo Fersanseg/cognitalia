@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { randomTimeout } from '../utils/functions/randomTimeout';
 import { IHeading } from '../utils/interfaces/iheading';
 
@@ -10,6 +10,7 @@ export class TrService {
   private headingSubject!: BehaviorSubject<IHeading> // Text to display in test box
   private stateSubject!:BehaviorSubject<string> // Controls box color and how the test state flows in handleStateChange()
   private testCountSubject!:BehaviorSubject<number> // Count of finished tests, to be emitted to the test page component
+  
   private clickable:boolean = false; // Controls if the user is allowed to click the box or not (premature clicks)
   private timeoutId!:any; // Stores "waiting" state timeout id, to clear it on a premature click
   private startTime!:number; // Saves the time at which the state changes to "answerable"
@@ -22,34 +23,68 @@ export class TrService {
   }
   readonly initialState:string = "initState";
 
-  /*
-    States:
-    - Initial (didnt start yet)
-    - Testing (waiting for test to turn green)
-    - Answer (test turned green: click now)
-    - Feedback (wrong if clicked on Testing, right if clicked on Answer; click again for another round)
-    - End (finished 5 tests)
-  */
-
   constructor() {
     this.headingSubject = new BehaviorSubject(this.initialHeading)
     this.stateSubject = new BehaviorSubject(this.initialState);
     this.testCountSubject = new BehaviorSubject(this.responseTimes.length);
   }
 
-  getHeading() {
+  getHeading():Observable<IHeading> {
     return this.headingSubject.asObservable();
   }
 
-  getCurrentState() {
+  getCurrentState():Observable<string> {
     return this.stateSubject.asObservable();
   }
 
-  getCurrentTestCount() {
+  getCurrentTestCount():Observable<number> {
     return this.testCountSubject.asObservable();
   }
 
-  handleStateChange() {
+  getResponseTimes():string {
+    let acc:string = "";
+    this.responseTimes.forEach((t:number) => acc += (t+" ms, "));
+    acc = acc.substring(0, acc.length-2);
+    return acc;
+  }
+
+  getResponseAverage():number {
+    let acc:number = 0;
+    this.responseTimes.forEach(t => acc += t)
+    return Math.round(acc/this.testCountSubject.value);
+  }
+
+  evaluateResults(avg:number):string {
+    // VALUES ARE FOR TESTING PURPOSES: Refactor to db.json
+    // if(avg>342) {
+    //   return "Tu media está por debajo de la del 2.5% de la población";
+    // } else if(avg>332) {
+    //   return "Tu media está por encima de la del 90% de la población";
+    // } 
+    if(avg<220) {
+      return "Tu media es mejor que la del 97.5% de la población";
+    } else if(avg<228) {
+      return "Tu media es mejor que la del 95% de la población";
+    } else if(avg<235) {
+      return "Tu media es mejor que la del 90% de la población";
+    } else if(avg<247) {
+      return "Tu media es mejor que la del 75% de la población";
+    } else if(avg<259) {
+      return "Tu media es mejor que la del 50% de la población";
+    } else if(avg<287) {
+      return "Tu media es mejor que la del 25% de la población";
+    } else if(avg<311) {
+      return "Tu media es mejor que la del 10% de la población";
+    } else if(avg<332) {
+      return "Tu media es mejor que la del 5% de la población";
+    } else if(avg<342) {
+      return "Tu media es mejor que la del 2.5% de la población";
+    } else {
+      return "Tu media es peor que la del 2.5% de la población";
+    }
+  }
+
+  handleStateChange():void {
     switch(this.stateSubject.value) {
       // If current state is "waiting", changes to "answerable", or to "feedback" if user clicks too soon
       case "waitingState": 
@@ -77,7 +112,6 @@ export class TrService {
         this.clickTime = Date.now();
         this.handleTestResults();
 
-        // End state gets overruled by this block
         if(this.testCountSubject.value < 5) {
           this.stateSubject.next("feedbackState");
           this.headingSubject.next({
@@ -111,14 +145,14 @@ export class TrService {
     }
   }
 
-  waitingTimeout() {
+  waitingTimeout():void {
     this.timeoutId = setTimeout(() => {
       this.clickable = true;
       this.handleStateChange();
     }, randomTimeout(1, 2))
   }
 
-  handleTestResults() {
+  handleTestResults():void {
     const testCountLength = this.responseTimes.push(this.clickTime-this.startTime);
     this.testCountSubject.next(testCountLength);
   }
