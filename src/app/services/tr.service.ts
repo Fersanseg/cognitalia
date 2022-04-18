@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { randomTimeout } from '../utils/functions/randomTimeout';
 import { IHeading } from '../utils/interfaces/iheading';
 
@@ -9,8 +9,12 @@ import { IHeading } from '../utils/interfaces/iheading';
 export class TrService {
   private headingSubject!: BehaviorSubject<IHeading> // Text to display in test box
   private stateSubject!:BehaviorSubject<string> // Controls box color and how the test state flows in handleStateChange()
+  private testCountSubject!:BehaviorSubject<number> // Count of finished tests, to be emitted to the test page component
   private clickable:boolean = false; // Controls if the user is allowed to click the box or not (premature clicks)
   private timeoutId!:any; // Stores "waiting" state timeout id, to clear it on a premature click
+  private startTime!:number; // Saves the time at which the state changes to "answerable"
+  private clickTime!:number; // Saves the time at which the user correctly clicked the box.
+  private responseTimes:number[] = []; // Saves the results of the response time test.
 
   readonly initialHeading:IHeading = {
     title: "Haz click en la caja cuando ésta cambie de color rojo a verde.",
@@ -29,6 +33,7 @@ export class TrService {
   constructor() {
     this.headingSubject = new BehaviorSubject(this.initialHeading)
     this.stateSubject = new BehaviorSubject(this.initialState);
+    this.testCountSubject = new BehaviorSubject(this.responseTimes.length);
   }
 
   getHeading() {
@@ -39,11 +44,17 @@ export class TrService {
     return this.stateSubject.asObservable();
   }
 
+  getCurrentTestCount() {
+    return this.testCountSubject.asObservable();
+  }
+
   handleStateChange() {
     switch(this.stateSubject.value) {
       // If current state is "waiting", changes to "answerable", or to "feedback" if user clicks too soon
       case "waitingState": 
         if(this.clickable) {
+          this.startTime = Date.now();
+
           this.stateSubject.next("answerableState");
           this.headingSubject.next({
             title: "¡AHORA!",
@@ -62,10 +73,13 @@ export class TrService {
       
       // If current state is "answerable", changes to "feedback" and displays the test results
       case "answerableState":
+        this.clickTime = Date.now();
+        this.handleTestResults();
+
         this.stateSubject.next("feedbackState");
         this.headingSubject.next({
-          title: "Tiempo: ",
-          subtitle: "Haz click para probar de nuevo."
+          title: "Tiempo: "+(this.clickTime-this.startTime)+"ms",
+          subtitle: "Haz click para continuar."
         })
         break;
 
@@ -88,6 +102,15 @@ export class TrService {
     this.timeoutId = setTimeout(() => {
       this.clickable = true;
       this.handleStateChange();
-    }, randomTimeout(2.5, 5))
+    }, randomTimeout(1, 2))
+  }
+
+  handleTestResults() {
+    const testCountLength = this.responseTimes.push(this.clickTime-this.startTime);
+    this.testCountSubject.next(testCountLength);
+
+    if(testCountLength>=5) {
+      console.log(this.responseTimes);
+    }
   }
 }

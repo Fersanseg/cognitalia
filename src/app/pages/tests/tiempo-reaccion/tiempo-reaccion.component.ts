@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { getTestDescriptionFromStorage  } from 'src/app/utils/functions/getDescription';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { TrService } from 'src/app/services/tr.service';
 
 @Component({
   selector: 'app-tiempo-reaccion',
@@ -8,17 +9,17 @@ import { getTestDescriptionFromStorage  } from 'src/app/utils/functions/getDescr
   encapsulation: ViewEncapsulation.None // Need to disable Angular's Cross-site Scripting to style our testData resource
 })
 export class TiempoReaccionComponent implements OnInit {
-  // @Output() testDescription: string;
-  // testDescription!: string;
+  testCountSubscription!:Subscription;
 
-  constructor() {}
+  testCount!:number;
+
+  constructor(private trService:TrService) {}
   
   ngOnInit(): void {
-    // this.getDescription();
+    this.testCountSubscription = this.trService.getCurrentTestCount().subscribe(s => this.testCount = s);
   }
   
-  // Gets the test description from the browser's sessionStorage
-  // private getDescription(): void {
-  //   this.testDescription = getTestDescriptionFromStorage();
-  // }
+  ngOnDestroy(): void {
+    this.testCountSubscription.unsubscribe();
+  }
 }
