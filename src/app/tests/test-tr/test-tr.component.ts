@@ -11,11 +11,13 @@ import { IHeading } from 'src/app/utils/interfaces/iheading';
 export class TestTRComponent implements OnInit {
   textSubscription!:Subscription;
   stateSubscription!:Subscription;
+  testCountSubscription!:Subscription;
 
   title!:string;
   subtitle!:string;
   resultCount!:number;
   state!:string;
+  testCount!:number;
 
   constructor(private trService:TrService) {
   }
@@ -27,6 +29,7 @@ export class TestTRComponent implements OnInit {
     });
 
     this.stateSubscription = this.trService.getCurrentState().subscribe(s => this.state = s); 
+    this.testCountSubscription = this.trService.getCurrentTestCount().subscribe(s => this.testCount = s);
   }
 
   handleStateChange(): void {

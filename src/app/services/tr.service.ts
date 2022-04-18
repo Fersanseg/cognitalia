@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { randomTimeout } from '../utils/functions/randomTimeout';
 import { IHeading } from '../utils/interfaces/iheading';
 
@@ -17,7 +17,7 @@ export class TrService {
   private responseTimes:number[] = []; // Saves the results of the response time test.
 
   readonly initialHeading:IHeading = {
-    title: "Haz click en la caja cuando ésta cambie de color rojo a verde.",
+    title: "Haz click en esta caja cuando cambie de color rojo a verde.",
     subtitle: "Haz click cuando quieras empezar la prueba."
   }
   readonly initialState:string = "initState";
@@ -28,6 +28,7 @@ export class TrService {
     - Testing (waiting for test to turn green)
     - Answer (test turned green: click now)
     - Feedback (wrong if clicked on Testing, right if clicked on Answer; click again for another round)
+    - End (finished 5 tests)
   */
 
   constructor() {
@@ -76,11 +77,21 @@ export class TrService {
         this.clickTime = Date.now();
         this.handleTestResults();
 
-        this.stateSubject.next("feedbackState");
-        this.headingSubject.next({
-          title: "Tiempo: "+(this.clickTime-this.startTime)+"ms",
-          subtitle: "Haz click para continuar."
-        })
+        // End state gets overruled by this block
+        if(this.testCountSubject.value < 5) {
+          this.stateSubject.next("feedbackState");
+          this.headingSubject.next({
+            title: "Tiempo: "+(this.clickTime-this.startTime)+"ms",
+            subtitle: "Haz click para continuar."
+          })
+        } else {
+          this.stateSubject.next("endState");
+          this.headingSubject.next({
+            title: "Tiempo: "+(this.clickTime-this.startTime)+"ms",
+            subtitle: "¡Ya has terminado! Gracias por participar. Comprueba tus resultados más abajo."
+          })
+        }
+
         break;
 
       // If current state is "initial" or "feedback", changes to "waiting"
@@ -95,6 +106,8 @@ export class TrService {
 
         this.waitingTimeout();
         break;
+      default:
+        break;
     }
   }
 
@@ -108,9 +121,5 @@ export class TrService {
   handleTestResults() {
     const testCountLength = this.responseTimes.push(this.clickTime-this.startTime);
     this.testCountSubject.next(testCountLength);
-
-    if(testCountLength>=5) {
-      console.log(this.responseTimes);
-    }
   }
 }

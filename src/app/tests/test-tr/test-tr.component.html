@@ -1,7 +1,7 @@
 <div 
     class="trBox"
     [ngClass]="state"
-    (click)="handleStateChange()"
+    (click)="testCount>=5 ? null : handleStateChange()"
 >
     <span class="trBox__title">{{title}}</span>
     <span class="trBox__subtitle">{{subtitle}}</span>
