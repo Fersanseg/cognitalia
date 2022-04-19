@@ -12,8 +12,9 @@
     <app-test-results 
         class="testResults"
         *ngIf="testCount>=5"
-        [responseTimes]="responseTimes"
-        [averageTimes]="averageTimes"
-        [comparativeResults]="comparativeResults"
+        [responseTimes]="results.responseTimes"
+        [averageTimes]="results.averageTimes"
+        [comparativeResults]="results.comparativeResults"
+        [callbackFunction]="resetTest"
     ></app-test-results>
 </div>

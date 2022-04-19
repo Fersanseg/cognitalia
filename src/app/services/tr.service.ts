@@ -17,6 +17,7 @@ export class TrService {
   private clickTime!:number; // Saves the time at which the user correctly clicked the box.
   private responseTimes:number[] = []; // Saves the results of the response time test.
 
+
   readonly initialHeading:IHeading = {
     title: "Haz click en esta caja cuando cambie de color rojo a verde.",
     subtitle: "Haz click cuando quieras empezar la prueba."
@@ -29,38 +30,34 @@ export class TrService {
     this.testCountSubject = new BehaviorSubject(this.responseTimes.length);
   }
 
-  getHeading():Observable<IHeading> {
+  public getHeading():Observable<IHeading> {
     return this.headingSubject.asObservable();
   }
 
-  getCurrentState():Observable<string> {
+  public getCurrentState():Observable<string> {
     return this.stateSubject.asObservable();
   }
 
-  getCurrentTestCount():Observable<number> {
+  public getCurrentTestCount():Observable<number> {
     return this.testCountSubject.asObservable();
   }
 
-  getResponseTimes():string {
+  public getResponseTimes():string {
     let acc:string = "";
+    
     this.responseTimes.forEach((t:number) => acc += (t+" ms, "));
     acc = acc.substring(0, acc.length-2);
     return acc;
   }
 
-  getResponseAverage():number {
+  public getResponseAverage():number {
     let acc:number = 0;
     this.responseTimes.forEach(t => acc += t)
     return Math.round(acc/this.testCountSubject.value);
   }
 
-  evaluateResults(avg:number):string {
+  public evaluateResults(avg:number):string {
     // VALUES ARE FOR TESTING PURPOSES: Refactor to db.json
-    // if(avg>342) {
-    //   return "Tu media está por debajo de la del 2.5% de la población";
-    // } else if(avg>332) {
-    //   return "Tu media está por encima de la del 90% de la población";
-    // } 
     if(avg<220) {
       return "Tu media es mejor que la del 97.5% de la población";
     } else if(avg<228) {
@@ -84,7 +81,7 @@ export class TrService {
     }
   }
 
-  handleStateChange():void {
+  public handleStateChange():void {
     switch(this.stateSubject.value) {
       // If current state is "waiting", changes to "answerable", or to "feedback" if user clicks too soon
       case "waitingState": 
@@ -145,14 +142,21 @@ export class TrService {
     }
   }
 
-  waitingTimeout():void {
+  public resetTest():void {
+    this.headingSubject.next(this.initialHeading);
+    this.stateSubject.next(this.initialState);
+    this.testCountSubject.next(0);
+    this.responseTimes = [];
+  }
+
+  private waitingTimeout():void {
     this.timeoutId = setTimeout(() => {
       this.clickable = true;
       this.handleStateChange();
     }, randomTimeout(1, 2))
   }
 
-  handleTestResults():void {
+  private handleTestResults():void {
     const testCountLength = this.responseTimes.push(this.clickTime-this.startTime);
     this.testCountSubject.next(testCountLength);
   }

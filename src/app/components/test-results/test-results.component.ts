@@ -9,9 +9,14 @@ export class TestResultsComponent implements OnInit {
   @Input() responseTimes!:string|null;
   @Input() averageTimes?:string;
   @Input() comparativeResults!:string;
+  @Input() callbackFunction!:() => void;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  cbk() {
+    this.callbackFunction();
   }
 }

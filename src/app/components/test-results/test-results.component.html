@@ -3,4 +3,8 @@
     <span>{{responseTimes}}</span>
     <span *ngIf="averageTimes">{{averageTimes}}</span>
     <span>{{comparativeResults}}</span>
+    <app-button
+        [text]="'¿Intentarlo de nuevo?'"
+        (buttonClick)="cbk()"
+    ></app-button>
 </div>
