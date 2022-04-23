@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getTestDescriptionFromStorage } from 'src/app/utils/functions/getDescription';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-memoria-numerica',
@@ -9,7 +9,7 @@ import { getTestDescriptionFromStorage } from 'src/app/utils/functions/getDescri
 export class MemoriaNumericaComponent implements OnInit {
   testDescription!: string|null; 
 
-  constructor() { }
+  constructor(private dataStorageService:DataStorageService) { }
 
   ngOnInit(): void {
     this.getDescription();
@@ -17,6 +17,6 @@ export class MemoriaNumericaComponent implements OnInit {
   
   // Gets the test description from the browser's sessionStorage
   private getDescription(): void {
-    this.testDescription = getTestDescriptionFromStorage();
+    this.testDescription = this.dataStorageService.getData("TestDescription") || "Descripción del test no encontrada";
   }
 }

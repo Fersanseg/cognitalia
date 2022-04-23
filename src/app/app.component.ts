@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { DataStorageService } from './services/data-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent {
   title = 'cognitalia';
 
-  constructor(public router: Router) {
+  constructor(
+    public router: Router,
+    private dataStorageService:DataStorageService
+  ) {
     this.clearBrowserStorage();
   }
 
@@ -18,7 +22,7 @@ export class AppComponent {
     this.router.events.subscribe(ev => {
       if(ev instanceof NavigationEnd) {
         if(ev.urlAfterRedirects === '/') {
-          sessionStorage.clear();
+          this.dataStorageService.clearStorage();
         }
       }
     })

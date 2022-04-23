@@ -9,10 +9,9 @@
         (generateResults)="generateResults($event)"
     ></app-test-tr>
 
-    <div class="TR__results" *ngIf="testCount>=5">
+    <div class="TR__results" *ngIf="testCount<=5">
         <app-test-results 
             class="testResults"
-            
             [responseTimes]="results.responseTimes"
             [averageTimes]="results.averageTimes"
             [comparativeResults]="results.comparativeResults"

@@ -17,7 +17,6 @@ export class TrService {
   private clickTime!:number; // Saves the time at which the user correctly clicked the box.
   private responseTimes:number[] = []; // Saves the results of the response time test.
 
-
   readonly initialHeading:IHeading = {
     title: "Haz click en esta caja cuando cambie de color rojo a verde.",
     subtitle: "Haz click cuando quieras empezar la prueba."

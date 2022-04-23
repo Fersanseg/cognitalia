@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { getTestDescriptionFromStorage } from 'src/app/utils/functions/getDescription';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-test-description-box',
@@ -10,14 +10,20 @@ import { getTestDescriptionFromStorage } from 'src/app/utils/functions/getDescri
 export class TestDescriptionBoxComponent implements OnInit {
   testDescription!: string;
 
-  constructor() { }
+  constructor(private dataStorageService:DataStorageService) { }
 
   ngOnInit(): void {
-    this.getDescription();
+    this.setTestDescription();
   }
 
   // Gets the test description from the browser's sessionStorage
-  private getDescription(): void {
-    this.testDescription = getTestDescriptionFromStorage() || "Descripción del test no encontrada";
+  private setTestDescription(): void {
+    let desc = this.dataStorageService.getData("testDescription");
+    if(desc) {
+      this.testDescription = desc;
+    } else {
+      desc = this.dataStorageService.setAndGetData("testDescription", history.state.descriptionOfTest)
+      this.testDescription = desc;
+    }
   }
 }
