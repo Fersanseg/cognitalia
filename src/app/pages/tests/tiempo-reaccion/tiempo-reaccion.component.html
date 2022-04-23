@@ -9,12 +9,17 @@
         (generateResults)="generateResults($event)"
     ></app-test-tr>
 
-    <app-test-results 
-        class="testResults"
-        *ngIf="testCount>=5"
-        [responseTimes]="results.responseTimes"
-        [averageTimes]="results.averageTimes"
-        [comparativeResults]="results.comparativeResults"
-        [callbackFunction]="resetTest"
-    ></app-test-results>
+    <div class="TR__results" *ngIf="testCount>=5">
+        <app-test-results 
+            class="testResults"
+            
+            [responseTimes]="results.responseTimes"
+            [averageTimes]="results.averageTimes"
+            [comparativeResults]="results.comparativeResults"
+            [callbackFunction]="resetTest"
+        ></app-test-results>
+        <app-global-results
+            class="globalResults"
+        ></app-global-results>
+    </div>
 </div>

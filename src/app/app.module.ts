@@ -20,6 +20,7 @@ import { TestTRComponent } from './tests/test-tr/test-tr.component';
 import { TestMNumComponent } from './tests/test-mnum/test-mnum.component';
 import { TestDescriptionBoxComponent } from './components/test-description-box/test-description-box.component';
 import { TestResultsComponent } from './components/test-results/test-results.component';
+import { GlobalResultsComponent } from './components/global-results/global-results.component';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     TestMNumComponent,
     TestDescriptionBoxComponent,
     TestResultsComponent,
+    GlobalResultsComponent,
   ],
   imports: [
     BrowserModule,
