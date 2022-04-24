@@ -17,12 +17,11 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.testsService.getTests().subscribe((tests) => {
-      this.tests = tests;
-    });
+    this.testsService.getTests().subscribe((t) => this.tests = t);    
   }
 
   onClick(pageUrl: string) {
+    
     switch(pageUrl) {
       case "Tiempo de reacción":
         this.router.navigateByUrl("/tiempo-reaccion", {state: {descriptionOfTest: this.tests[0].description}});
