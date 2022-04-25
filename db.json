@@ -58,5 +58,37 @@
             ],
             "description": ""
         }
+    ],
+    "results": [
+        {
+            "id": 1,
+            "test": "Tiempo de reacción",
+            "score": "---"
+        },
+        {
+            "id": 2,
+            "test": "Memoria numérica",
+            "score": "---"
+        },
+        {
+            "id": 3,
+            "test": "Memoria verbal",
+            "score": "---"
+        },
+        {
+            "id": 4,
+            "test": "Memoria visual",
+            "score": "---"
+        },
+        {
+            "id": 5,
+            "test": "Velocidad de escritura",
+            "score": "---"
+        },
+        {
+            "id": 6,
+            "test": "Test de Stroop",
+            "score": "---"
+        }
     ]
 }

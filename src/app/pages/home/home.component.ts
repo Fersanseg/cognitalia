@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ITest } from 'src/app/utils/interfaces/ITest';
 import { TestsService } from 'src/app/services/tests.service';
+import { IGlobalResults } from 'src/app/utils/interfaces/iglobal-results';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { TestsService } from 'src/app/services/tests.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  tests: ITest[] = [];
+  public tests: ITest[] = [];
 
   constructor(
     private testsService: TestsService,
@@ -17,11 +18,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.testsService.getTests().subscribe((t) => this.tests = t);    
+    this.testsService.getTests().subscribe((t) => this.tests = t);  
   }
 
   onClick(pageUrl: string) {
-    
     switch(pageUrl) {
       case "Tiempo de reacción":
         this.router.navigateByUrl("/tiempo-reaccion", {state: {descriptionOfTest: this.tests[0].description}});
