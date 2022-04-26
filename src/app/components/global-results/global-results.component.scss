@@ -1,8 +1,13 @@
 @import '../../utils/variables.scss';
 
 .globalResults {
-    display: flex;
-    flex-direction: column;
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 5px 5px; 
+    justify-content: center;
+    align-content: center;
+    
     height: 100%;
     text-align: center;
     font-size: 2rem;

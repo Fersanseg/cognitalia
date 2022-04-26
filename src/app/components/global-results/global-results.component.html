@@ -3,10 +3,6 @@
         *ngFor="let results of globalTestResults"
         [firstRow]="results.test"
         [secondRow]="results.score"
-    ></app-two-rows-textblock>
-</div>
-    
-<!-- Importar el array de IGlobalResults AQUI.
-    Iterar sobre él con ngFor, pasándole cada resultado
-    La grabación de un resultado la hace cada test
-    con un metodo PUT del servicio de resultados. -->
+        ></app-two-rows-textblock>
+    </div>
+    <!-- [ngStyle]="{'display': 'flex'}" -->
