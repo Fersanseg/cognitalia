@@ -1,8 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 import { IGlobalResults } from '../utils/interfaces/iglobal-results';
 import { ITest } from '../utils/interfaces/ITest';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +67,15 @@ export class TestsService {
       );
     }
     return this.cacheSingleTestResults;
+  }
+
+  /**
+   * Updates the backend with a new result for the specified test
+   * @param test An object of type IGlobalResults that holds the info which will update the backend
+   * @returns An observable that serves an object of type IGlobalResults
+   */
+  public updateResult(test:IGlobalResults):Observable<IGlobalResults> {
+    const url = `${this.resultsEndpoint}/${test.id}`
+    return this.http.put<IGlobalResults>(url, test, httpOptions);
   }
 }

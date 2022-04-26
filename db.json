@@ -1,94 +1,94 @@
 {
-    "tests": [
-        {
-            "id": 1,
-            "title": "Tiempo de reacción",
-            "subtitle": "Mide tus reflejos",
-            "icon": [
-                "./assets/clock-regular.svg"
-            ],
-            "description": "<h3>¿Cómo de rápido crees que eres capaz de reaccionar a un estímulo?</h3><p>En este test tendrás que observar con detenimiento tu pantalla y hacer click en el área del test en cuanto el color rojo cambie a verde, lo más rápido que puedas. Pero ten cuidado: si haces click antes de tiempo, tu prueba quedará anulada.</p><p>La prueba mide el tiempo que transcurre entre que el estímulo ocurre hasta que tu cerebro lo procesa, envía la señal de hacer click a tu mano, y los músculos de tus dedos ejecutan la orden.</p><p>El tiempo de reacción más rápido registrado en la historia es de 120ms, mientras que el tiempo promedio es de alrededor de 250ms, y no es raro obtener algo menos de 200ms o más de 300ms. Recuerda: cuanto menor tiempo, mejor: significa que reaccionas más rápido.</p>"
-        },
-        {
-            "id": 2,
-            "title": "Memoria numérica",
-            "subtitle": "Comprueba cuántas cifras puedes recordar a la vez",
-            "icon": [
-                "./assets/1-solid.svg",
-                "./assets/2-solid.svg",
-                "./assets/3-solid.svg"
-            ],
-            "description": "memoria numerica descripcion test"
-        },
-        {
-            "id": 3,
-            "title": "Memoria verbal",
-            "subtitle": "Recuerda la mayor cantidad de palabras posible",
-            "icon": [
-                "./assets/h-solid.svg",
-                "./assets/i-solid.svg",
-                "./assets/exclamation-solid.svg"
-            ],
-            "description": ""
-        },
-        {
-            "id": 4,
-            "title": "Memoria visual",
-            "subtitle": "Recuerda un tablero cada vez más grande",
-            "icon": [
-                "./assets/table-cells-solid.svg"
-            ],
-            "description": ""
-        },
-        {
-            "id": 5,
-            "title": "Velocidad de escritura",
-            "subtitle": "Mide cuántas palabras puedes escribir por minuto",
-            "icon": [
-                "./assets/keyboard-solid.svg"
-            ],
-            "description": ""
-        },
-        {
-            "id": 6,
-            "title": "Test de Stroop",
-            "subtitle": "Comprueba si eres capaz de ignorar estímulos conflictivos",
-            "icon": [
-                "./assets/palette-solid.svg"
-            ],
-            "description": ""
-        }
-    ],
-    "results": [
-        {
-            "id": 1,
-            "test": "Tiempo de reacción",
-            "score": "---"
-        },
-        {
-            "id": 2,
-            "test": "Memoria numérica",
-            "score": "---"
-        },
-        {
-            "id": 3,
-            "test": "Memoria verbal",
-            "score": "---"
-        },
-        {
-            "id": 4,
-            "test": "Memoria visual",
-            "score": "---"
-        },
-        {
-            "id": 5,
-            "test": "Velocidad de escritura",
-            "score": "---"
-        },
-        {
-            "id": 6,
-            "test": "Test de Stroop",
-            "score": "---"
-        }
-    ]
+  "tests": [
+    {
+      "id": 1,
+      "title": "Tiempo de reacción",
+      "subtitle": "Mide tus reflejos",
+      "icon": [
+        "./assets/clock-regular.svg"
+      ],
+      "description": "<h3>¿Cómo de rápido crees que eres capaz de reaccionar a un estímulo?</h3><p>En este test tendrás que observar con detenimiento tu pantalla y hacer click en el área del test en cuanto el color rojo cambie a verde, lo más rápido que puedas. Pero ten cuidado: si haces click antes de tiempo, tu prueba quedará anulada.</p><p>La prueba mide el tiempo que transcurre entre que el estímulo ocurre hasta que tu cerebro lo procesa, envía la señal de hacer click a tu mano, y los músculos de tus dedos ejecutan la orden.</p><p>El tiempo de reacción más rápido registrado en la historia es de 120ms, mientras que el tiempo promedio es de alrededor de 250ms, y no es raro obtener algo menos de 200ms o más de 300ms. Recuerda: cuanto menor tiempo, mejor: significa que reaccionas más rápido.</p>"
+    },
+    {
+      "id": 2,
+      "title": "Memoria numérica",
+      "subtitle": "Comprueba cuántas cifras puedes recordar a la vez",
+      "icon": [
+        "./assets/1-solid.svg",
+        "./assets/2-solid.svg",
+        "./assets/3-solid.svg"
+      ],
+      "description": "memoria numerica descripcion test"
+    },
+    {
+      "id": 3,
+      "title": "Memoria verbal",
+      "subtitle": "Recuerda la mayor cantidad de palabras posible",
+      "icon": [
+        "./assets/h-solid.svg",
+        "./assets/i-solid.svg",
+        "./assets/exclamation-solid.svg"
+      ],
+      "description": ""
+    },
+    {
+      "id": 4,
+      "title": "Memoria visual",
+      "subtitle": "Recuerda un tablero cada vez más grande",
+      "icon": [
+        "./assets/table-cells-solid.svg"
+      ],
+      "description": ""
+    },
+    {
+      "id": 5,
+      "title": "Velocidad de escritura",
+      "subtitle": "Mide cuántas palabras puedes escribir por minuto",
+      "icon": [
+        "./assets/keyboard-solid.svg"
+      ],
+      "description": ""
+    },
+    {
+      "id": 6,
+      "title": "Test de Stroop",
+      "subtitle": "Comprueba si eres capaz de ignorar estímulos conflictivos",
+      "icon": [
+        "./assets/palette-solid.svg"
+      ],
+      "description": ""
+    }
+  ],
+  "results": [
+    {
+      "id": 1,
+      "test": "Tiempo de reacción",
+      "score": "273ms"
+    },
+    {
+      "id": 2,
+      "test": "Memoria numérica",
+      "score": "---"
+    },
+    {
+      "id": 3,
+      "test": "Memoria verbal",
+      "score": "---"
+    },
+    {
+      "id": 4,
+      "test": "Memoria visual",
+      "score": "---"
+    },
+    {
+      "id": 5,
+      "test": "Velocidad de escritura",
+      "score": "---"
+    },
+    {
+      "id": 6,
+      "test": "Test de Stroop",
+      "score": "---"
+    }
+  ]
 }
