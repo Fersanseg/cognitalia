@@ -1,12 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Observable, ObservableInput } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-single-test-global-results',
   templateUrl: './single-test-global-results.component.html',
   styleUrls: ['./single-test-global-results.component.scss']
 })
-export class SingleTestGlobalResultsComponent implements OnInit, OnChanges {
+export class SingleTestGlobalResultsComponent implements OnInit {
   @Input() testName!:string;
   @Input() testScore?:string;
 
@@ -14,9 +13,4 @@ export class SingleTestGlobalResultsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-      console.log(changes['testScore'].currentValue);
-  }
-
 }
