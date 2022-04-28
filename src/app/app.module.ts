@@ -21,7 +21,7 @@ import { TestMNumComponent } from './tests/test-mnum/test-mnum.component';
 import { TestDescriptionBoxComponent } from './components/test-description-box/test-description-box.component';
 import { TestResultsComponent } from './components/test-results/test-results.component';
 import { GlobalResultsComponent } from './components/global-results/global-results.component';
-import { TwoRowsTextblockComponent } from './components/two-rows-textblock/two-rows-textblock.component';
+import { SingleTestGlobalResultsComponent } from './components/single-test-global-results/single-test-global-results.component';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
@@ -52,7 +52,7 @@ const appRoutes: Routes = [
     TestDescriptionBoxComponent,
     TestResultsComponent,
     GlobalResultsComponent,
-    TwoRowsTextblockComponent,
+    SingleTestGlobalResultsComponent,
   ],
   imports: [
     BrowserModule,

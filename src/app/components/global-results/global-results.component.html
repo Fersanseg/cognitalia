@@ -1,8 +1,7 @@
 <div class="globalResults">
-    <app-two-rows-textblock
-        *ngFor="let results of globalTestResults"
-        [firstRow]="results.test"
-        [secondRow]="results.score"
-        ></app-two-rows-textblock>
+    <app-single-test-global-results
+        *ngFor="let result of results$ | async"
+        [testName]="result.test"
+        [testScore]="result.score"
+        ></app-single-test-global-results>
     </div>
-    <!-- [ngStyle]="{'display': 'flex'}" -->

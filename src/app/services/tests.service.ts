@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { flush } from '@angular/core/testing';
 import { map, Observable, shareReplay } from 'rxjs';
 import { IGlobalResults } from '../utils/interfaces/iglobal-results';
 import { ITest } from '../utils/interfaces/ITest';
@@ -46,13 +47,9 @@ export class TestsService {
    * @returns An observable that serves an array of IGlobalResults objects
    */
   public getAllGlobalResults(): Observable<IGlobalResults[]> {
-    if(!this.cacheGlobalTestResults) {
-      this.cacheGlobalTestResults = this.http.get<IGlobalResults[]>(this.resultsEndpoint).pipe(
-        map((res:IGlobalResults[]) => res),
-        shareReplay(1)
-      );
-    }
-    return this.cacheGlobalTestResults;
+    return this.http.get<IGlobalResults[]>(this.resultsEndpoint).pipe(
+      map((res:IGlobalResults[]) => res)
+    );
   }
   /**
    * Fetches the results API and filters for the results of the specified test
@@ -60,13 +57,10 @@ export class TestsService {
    * @returns An observable that serves an object of type IGlobalResults
    */
   public getSingleTestGlobalResults(testId:number): Observable<IGlobalResults> {
-    if(!this.cacheSingleTestResults) {
-      this.cacheSingleTestResults = this.http.get<IGlobalResults[]>(this.resultsEndpoint).pipe(
-        map((res:IGlobalResults[]) => res.filter(r => r.id == testId)[0]),
-        shareReplay(1)
-      );
-    }
-    return this.cacheSingleTestResults;
+    return this.http.get<IGlobalResults[]>(this.resultsEndpoint).pipe(
+      map((res:IGlobalResults[]) => res.filter(r => r.id == testId)[0]),
+      shareReplay(1)
+    );
   }
 
   /**
@@ -77,5 +71,9 @@ export class TestsService {
   public updateResult(test:IGlobalResults):Observable<IGlobalResults> {
     const url = `${this.resultsEndpoint}/${test.id}`
     return this.http.put<IGlobalResults>(url, test, httpOptions);
+  }
+
+  private flushCache(cache:any) {
+    cache = null;
   }
 }

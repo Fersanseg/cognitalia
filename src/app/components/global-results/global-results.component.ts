@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { EventsService } from 'src/app/services/events.service';
 import { TestsService } from 'src/app/services/tests.service';
 import { IGlobalResults } from 'src/app/utils/interfaces/iglobal-results';
 
@@ -7,12 +9,27 @@ import { IGlobalResults } from 'src/app/utils/interfaces/iglobal-results';
   templateUrl: './global-results.component.html',
   styleUrls: ['./global-results.component.scss']
 })
-export class GlobalResultsComponent implements OnInit {
-  public globalTestResults!:IGlobalResults[];
+export class GlobalResultsComponent implements OnInit, OnDestroy {
+  private allGlobalResultsSubscription!:Subscription;
+  private resultsChangedEvent!:Subscription;
 
-  constructor(private testsService:TestsService) { }
+  public results$!:Observable<IGlobalResults[]>;
+  // public globalTestResults!:IGlobalResults[];
+
+  constructor(private testsService:TestsService, private eventsService:EventsService) { }
 
   ngOnInit(): void {
-    this.testsService.getAllGlobalResults().subscribe(response => this.globalTestResults = response)
+    this.loadGlobalResults();
+    this.eventsService.ResultsSaved.subscribe(() => this.loadGlobalResults())
+  }
+
+
+  
+  private loadGlobalResults(): void {
+    this.results$ = this.testsService.getAllGlobalResults();
+  }
+
+  ngOnDestroy(): void {
+    
   }
 }
