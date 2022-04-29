@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EventsService } from 'src/app/services/events.service';
-import { TestsService } from 'src/app/services/tests.service';
+import { EventsService } from 'src/app/services/common/events.service';
+import { TestsService } from 'src/app/services/common/tests.service';
 import { IGlobalResults } from 'src/app/utils/interfaces/iglobal-results';
 
 @Component({

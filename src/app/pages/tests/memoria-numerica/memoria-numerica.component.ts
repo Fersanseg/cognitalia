@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataStorageService } from 'src/app/services/data-storage.service';
+import { DataStorageService } from 'src/app/services/common/data-storage.service';
 
 @Component({
   selector: 'app-memoria-numerica',

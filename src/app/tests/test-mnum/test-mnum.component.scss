@@ -1,7 +1,6 @@
 @import '../../utils/variables.scss';
 
 .mnumBox {
-    background-color: $light-green;
     width: 100%;
     min-height: 40rem;
     border-radius: 1rem;
@@ -15,4 +14,8 @@
         font-weight: bold;
         padding-top: 5rem;
     }
+}
+
+.initState {
+    background-color: $light-green;
 }

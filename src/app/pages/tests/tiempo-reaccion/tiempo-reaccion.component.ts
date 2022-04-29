@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { EventsService } from 'src/app/services/events.service';
-import { TestsService } from 'src/app/services/tests.service';
-import { TrService } from 'src/app/services/tr.service';
+import { EventsService } from 'src/app/services/common/events.service';
+import { TestsService } from 'src/app/services/common/tests.service';
+import { TrService } from 'src/app/services/tiempo-reaccion/tr.service';
 import { IGlobalResults } from 'src/app/utils/interfaces/iglobal-results';
 import { IResults } from 'src/app/utils/interfaces/iresults';
 

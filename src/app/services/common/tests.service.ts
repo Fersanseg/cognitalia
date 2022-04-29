@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { flush } from '@angular/core/testing';
 import { map, Observable, shareReplay } from 'rxjs';
-import { IGlobalResults } from '../utils/interfaces/iglobal-results';
-import { ITest } from '../utils/interfaces/ITest';
+import { IGlobalResults } from '../../utils/interfaces/iglobal-results';
+import { ITest } from '../../utils/interfaces/ITest';
 
 
 const httpOptions = {

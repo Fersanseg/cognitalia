@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TrService } from 'src/app/services/tr.service';
+import { TrService } from 'src/app/services/tiempo-reaccion/tr.service';
 
 @Component({
   selector: 'app-test-tr',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { DataStorageService } from './services/data-storage.service';
+import { DataStorageService } from './services/common/data-storage.service';
 
 @Component({
   selector: 'app-root',

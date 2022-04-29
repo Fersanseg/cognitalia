@@ -1,3 +1,10 @@
-<div class="mnumBox">
-    <span class="mnumBox__title">{{title}}</span>
+<div 
+    class="mnumBox"
+    [ngClass]="state"
+    (click)="handleStateChange()"    
+>
+    <span 
+        class="mnumBox__title"
+        *ngIf="heading$ | async as heading"
+    >{{heading.title}}</span>
 </div>

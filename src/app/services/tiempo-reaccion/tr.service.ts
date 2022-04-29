@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { randomTimeout } from '../utils/functions/randomTimeout';
-import { IHeading } from '../utils/interfaces/iheading';
+import { randomTimeout } from '../../utils/functions/randomTimeout';
+import { IHeading } from '../../utils/interfaces/iheading';
 
 @Injectable({
   providedIn: 'root'

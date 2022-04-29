@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ITest } from 'src/app/utils/interfaces/ITest';
-import { TestsService } from 'src/app/services/tests.service';
-import { IGlobalResults } from 'src/app/utils/interfaces/iglobal-results';
+import { TestsService } from 'src/app/services/common/tests.service';
 
 @Component({
   selector: 'app-home',
