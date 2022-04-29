@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test-mnum.component.scss']
 })
 export class TestMNumComponent implements OnInit {
+  public title:string = "Haz click en esta caja cuando quieras empezar el test";
 
   constructor() { }
 

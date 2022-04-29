@@ -1,0 +1,26 @@
+.MNum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem 0;
+    
+    & > * {
+        margin: 1.5rem;
+        width: 80%;
+    }
+    
+    &__results {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.testResults,
+.globalResults {
+    flex: 0 0 48%;
+}
+
+.testCount {
+    text-align: center;
+    font-size: 2rem;
+}
