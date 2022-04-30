@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subscription } from 'rxjs';
 import { MnumService } from 'src/app/services/memoria-numerica/mnum.service';
 import { IHeading } from 'src/app/utils/interfaces/iheading';
@@ -22,7 +23,22 @@ export class TestMNumComponent implements OnInit, OnDestroy {
   }
 
   handleStateChange(): void {
-    this.mnumService.handleStateChange();
+    if(this.state === "initState")
+      this.mnumService.handleStateChange();
+  }
+
+  onKeyDown(e: any):boolean {
+    var charCode = (e.which) ? e.which : e.keyCode;
+
+    if ((charCode < 48 || charCode > 57) && charCode !== 13) {
+      return false;
+    } else {
+      if (charCode === 13) {
+        const answer = e.target.value;
+        this.mnumService.handleStateChange(answer);
+      } 
+      return true;
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import './app/utils/variables.scss';
 
 *,
 *::after,
@@ -15,5 +16,5 @@ html {
 
 body {
     font-size: 1.6rem;
-    background-color: rgb(235, 255, 255);
+    background-color: $off-white;
 }

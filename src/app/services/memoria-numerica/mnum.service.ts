@@ -42,24 +42,15 @@ export class MnumService {
     return this.stateSubject.asObservable();
   }
 
-  public handleStateChange():void {
+  public handleStateChange(answer?:number):void {
     switch (this.stateSubject.value) {
       // If current state is "initState", change to "waitingState"
       case "initState":
         this.stateSubject.next("waitingState");
+        const message = "Prepárate para memorizar el siguiente número...";
         let count:number = 3;
 
-        this.countdown(count);
-        const interval = setInterval(() => {
-          if(count>1) {
-            count--;
-            this.countdown(count);
-          } else {
-            clearInterval(interval)
-            this.currentNumber = Math.round(randomNumber(0, 9, 1));
-            this.handleStateChange();
-          };
-        }, 1000);
+        this.waitingInterval(message, count);
         break;
       
       // If current state is "waitingState", change to "memorizeState"
@@ -72,15 +63,52 @@ export class MnumService {
 
         const memorizeTimeout = setTimeout(() => {
           this.handleStateChange();
-        }, this.correctAnswersCount+1);
+        }, (this.correctAnswersCount+2)*1000);
+        break;
+
+      // If current state is "memorizeState", change to "answerState"
+      case "memorizeState":
+        this.stateSubject.next("answerState");
+        this.headingSubject.next({
+          title: "¿Qué número era? Pulsa 'intro' para enviar tu respuesta",
+          subtitle: ""
+        })
+        break;
+
+      // If current state is "answerState", validates answer and changes to "waitingState" if correct, or "endState" if wrong
+      case "answerState":
+        if (answer == this.currentNumber) {
+          const message = "¡Genial! A ver si aciertas el siguiente...";
+          this.correctAnswersCount++;
+          this.stateSubject.next("waitingState");
+          let count:number = 3;
+
+          this.waitingInterval(message, count);
+        }
         break;
     }
   }
 
-  private countdown(count:number):void {
+  private waitingInterval(message:string, count:number) {
+    this.countdown(message, count);
+
+    const interval = setInterval(() => {
+      if(count>1) {
+        count--;
+        this.countdown(message,count);
+      } else {
+        clearInterval(interval);
+        this.currentNumber = Math.round(randomNumber(0, 9, this.correctAnswersCount+1));
+        this.handleStateChange();
+      }
+    }, 1000);
+  }
+
+  private countdown(message:string, count:number):void {
     this.headingSubject.next({
-      title: "Prepárate para memorizar el siguiente número...",
+      title: message,
       subtitle: count.toString()
     })
   }
+
 }

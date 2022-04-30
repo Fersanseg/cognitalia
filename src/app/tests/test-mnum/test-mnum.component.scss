@@ -28,6 +28,31 @@
             margin-top: 2rem;
         }
     }
+
+    &__answer {
+        all: unset;
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        background-color: $off-white;
+        margin: 2rem;
+        width: 30rem;
+        height: 5rem;
+        font-size: 3rem;
+        border-radius: 5rem;
+        border: 1px solid gray;
+        outline: 0px solid transparent;
+        transition: transform 0.1s, outline 0.2s ease-out, box-shadow 0.1s;
+        
+        &:hover {
+            transform: scaleY(1.1) scaleX(1.05);
+        }
+
+        &:focus {
+            transform: scaleY(1.1) scaleX(1.05);
+            outline: 3px solid rgb(43, 43, 180);
+            box-shadow: 0 -0.01rem 0.3rem 0.5rem rgb(43, 43, 180);
+        }
+    }
 }
 
 .initState,
@@ -35,6 +60,7 @@
     background-color: $light-green;
 }
 
-.memorizeState {
+.memorizeState,
+.answerState {
     background-color: $light-blue;
 }
