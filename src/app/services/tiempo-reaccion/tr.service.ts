@@ -134,7 +134,10 @@ export class TrService {
           subtitle: ""
         })
 
-        this.waitingTimeout();
+        this.timeoutId = setTimeout(() => {
+          this.clickable = true;
+          this.handleStateChange();
+        }, randomNumber(1, 2, 4))
         break;
       default:
         break;
@@ -146,13 +149,6 @@ export class TrService {
     this.stateSubject.next(this.initialState);
     this.testCountSubject.next(0);
     this.responseTimes = [];
-  }
-
-  private waitingTimeout():void {
-    this.timeoutId = setTimeout(() => {
-      this.clickable = true;
-      this.handleStateChange();
-    }, randomNumber(1, 2, 4))
   }
 
   private handleTestResults():void {

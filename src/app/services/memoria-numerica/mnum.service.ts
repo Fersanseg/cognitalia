@@ -47,7 +47,6 @@ export class MnumService {
       // If current state is "initState", change to "waitingState"
       case "initState":
         this.stateSubject.next("waitingState");
-
         let count:number = 3;
 
         this.countdown(count);
@@ -63,7 +62,17 @@ export class MnumService {
         }, 1000);
         break;
       
-      case "memorizeState":
+      // If current state is "waitingState", change to "memorizeState"
+      case "waitingState":
+        this.stateSubject.next("memorizeState");
+        this.headingSubject.next({
+          title: "Mira atentamente e intenta memorizar este número!",
+          subtitle: this.currentNumber.toString()
+        });
+
+        const memorizeTimeout = setTimeout(() => {
+          this.handleStateChange();
+        }, this.correctAnswersCount+1);
         break;
     }
   }
