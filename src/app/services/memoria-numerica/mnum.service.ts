@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { randomNumber } from 'src/app/utils/functions/randomNumber';
 import { IHeading } from 'src/app/utils/interfaces/iheading';
 
 @Injectable({
@@ -8,6 +9,9 @@ import { IHeading } from 'src/app/utils/interfaces/iheading';
 export class MnumService {
   private stateSubject!:BehaviorSubject<string> // Controls box color and how the test state flows in handleStateChange()
   private headingSubject!:BehaviorSubject<IHeading>; // Text to display in test box
+
+  private correctAnswersCount:number = 0;
+  private currentNumber!:number;
 
   readonly initialHeading:IHeading = {
     title: "Haz click en esta caja cuando quieras empezar el test",
@@ -53,8 +57,13 @@ export class MnumService {
             this.countdown(count);
           } else {
             clearInterval(interval)
+            this.currentNumber = Math.round(randomNumber(0, 9, 1));
+            this.handleStateChange();
           };
         }, 1000);
+        break;
+      
+      case "memorizeState":
         break;
     }
   }

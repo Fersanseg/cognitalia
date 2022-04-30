@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { randomTimeout } from '../../utils/functions/randomTimeout';
+import { randomNumber } from '../../utils/functions/randomNumber';
 import { IHeading } from '../../utils/interfaces/iheading';
 
 @Injectable({
@@ -152,7 +152,7 @@ export class TrService {
     this.timeoutId = setTimeout(() => {
       this.clickable = true;
       this.handleStateChange();
-    }, randomTimeout(1, 2))
+    }, randomNumber(1, 2, 4))
   }
 
   private handleTestResults():void {
