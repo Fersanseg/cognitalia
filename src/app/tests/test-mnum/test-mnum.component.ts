@@ -22,7 +22,7 @@ export class TestMNumComponent implements OnInit, OnDestroy {
   }
 
   handleStateChange(): void {
-
+    this.mnumService.handleStateChange();
   }
 
   ngOnDestroy(): void {

@@ -15,6 +15,16 @@ export class MnumService {
   };
   readonly initialState:string = "initState";
 
+  /* ESTADOS
+    Inicial (no ha hecho click para empezar aun)
+    Empezando (cuenta atras hasta que salga el numero)
+    Memorizar (sale el numero, hay que memorizarlo)
+    Responder (se va el numero, hay que escribirlo y darle al boton)
+      Si es correcto, Empezando otra vez, dando mensaje de "numero correcto"
+      Si no, Resultados
+    Resultado (has fallado un número de X cifras)
+  */
+
   constructor() {
     this.headingSubject = new BehaviorSubject(this.initialHeading);
     this.stateSubject = new BehaviorSubject(this.initialState);
@@ -26,5 +36,33 @@ export class MnumService {
 
   public getCurrentState():Observable<string> {
     return this.stateSubject.asObservable();
+  }
+
+  public handleStateChange():void {
+    switch (this.stateSubject.value) {
+      // If current state is "initState", change to "waitingState"
+      case "initState":
+        this.stateSubject.next("waitingState");
+
+        let count:number = 3;
+
+        this.countdown(count);
+        const interval = setInterval(() => {
+          if(count>1) {
+            count--;
+            this.countdown(count);
+          } else {
+            clearInterval(interval)
+          };
+        }, 1000);
+        break;
+    }
+  }
+
+  private countdown(count:number):void {
+    this.headingSubject.next({
+      title: "Prepárate para memorizar el siguiente número...",
+      subtitle: count.toString()
+    })
   }
 }
