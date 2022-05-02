@@ -41,7 +41,6 @@ export class TiempoReaccionComponent implements OnInit, OnDestroy {
       this.trService.resetTest();
     }
   }
-
   
   /**
    * Generates the results sheet for the current test, as well as saving the result to the current session in the backend

@@ -8,7 +8,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 export class TestResultsComponent implements OnInit {
   @Input() responseTimes!:string|null;
   @Input() averageTimes?:string;
-  @Input() comparativeResults!:string;
+  @Input() comparativeResults?:string;
   @Input() callbackFunction!:() => void;
 
   constructor() { }

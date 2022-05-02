@@ -2,9 +2,10 @@
     <app-test-description-box></app-test-description-box>
     <app-test-mnum></app-test-mnum>
 
-    <div class="MNum__results">
+    <div class="MNum__results" *ngIf="testFinished | async">
         <app-test-results
             class="testResults"
+            [responseTimes]="results"
         ></app-test-results>
         <app-global-results
             class="globalResults"

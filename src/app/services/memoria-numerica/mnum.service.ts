@@ -9,6 +9,7 @@ import { IHeading } from 'src/app/utils/interfaces/iheading';
 export class MnumService {
   private stateSubject!:BehaviorSubject<string> // Controls box color and how the test state flows in handleStateChange()
   private headingSubject!:BehaviorSubject<IHeading>; // Text to display in test box
+  private testFinishedSubject!:BehaviorSubject<boolean>; // Controls if the test finished (to show the results sheet)
 
   private correctAnswersCount:number = 0;
   private currentNumber!:number;
@@ -18,20 +19,12 @@ export class MnumService {
     subtitle: ""
   };
   readonly initialState:string = "initState";
-
-  /* ESTADOS
-    Inicial (no ha hecho click para empezar aun)
-    Empezando (cuenta atras hasta que salga el numero)
-    Memorizar (sale el numero, hay que memorizarlo)
-    Responder (se va el numero, hay que escribirlo y darle al boton)
-      Si es correcto, Empezando otra vez, dando mensaje de "numero correcto"
-      Si no, Resultados
-    Resultado (has fallado un número de X cifras)
-  */
+  readonly initialTestFinished:boolean = false;
 
   constructor() {
     this.headingSubject = new BehaviorSubject(this.initialHeading);
     this.stateSubject = new BehaviorSubject(this.initialState);
+    this.testFinishedSubject = new BehaviorSubject(this.initialTestFinished);
   }
 
   public getHeading():Observable<IHeading> {
@@ -40,6 +33,14 @@ export class MnumService {
 
   public getCurrentState():Observable<string> {
     return this.stateSubject.asObservable();
+  }
+
+  public getTestFinished():Observable<boolean> {
+    return this.testFinishedSubject.asObservable();
+  }
+
+  public getResults():string {
+    return "El número más largo que has podido recordar es de "+this.correctAnswersCount+" cifras";
   }
 
   public handleStateChange(answer?:number):void {
@@ -84,6 +85,14 @@ export class MnumService {
           let count:number = 3;
 
           this.waitingInterval(message, count);
+        } 
+        else {
+          this.testFinishedSubject.next(true);
+          this.stateSubject.next("endState");
+          this.headingSubject.next({
+            title: "¡Has fallado! El número era "+this.currentNumber.toString(),
+            subtitle: ""
+          });
         }
         break;
     }
