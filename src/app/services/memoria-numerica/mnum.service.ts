@@ -39,8 +39,8 @@ export class MnumService {
     return this.testFinishedSubject.asObservable();
   }
 
-  public getResults():string {
-    return "El número más largo que has podido recordar es de "+this.correctAnswersCount+" cifras";
+  public getResults():number {
+    return this.correctAnswersCount;
   }
 
   public handleStateChange(answer?:number):void {
@@ -96,6 +96,13 @@ export class MnumService {
         }
         break;
     }
+  }
+
+  public resetTest():void {
+    this.testFinishedSubject.next(false);
+    this.stateSubject.next(this.initialState);
+    this.headingSubject.next(this.initialHeading);
+    this.correctAnswersCount = 0;
   }
 
   private waitingInterval(message:string, count:number) {
