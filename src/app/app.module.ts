@@ -22,9 +22,13 @@ import { TestDescriptionBoxComponent } from './components/test-description-box/t
 import { TestResultsComponent } from './components/test-results/test-results.component';
 import { GlobalResultsComponent } from './components/global-results/global-results.component';
 import { SingleTestGlobalResultsComponent } from './components/single-test-global-results/single-test-global-results.component';
+import { LoginComponent } from './pages/auth/login/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register/register.component';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
+  {path: "acceso-usuario", component: LoginComponent},
+  {path: "registro-usuario", component: RegisterComponent},
   {path: "tiempo-reaccion", component: TiempoReaccionComponent},
   {path: "memoria-numerica", component: MemoriaNumericaComponent},
   {path: "memoria-verbal", component: MemoriaVerbalComponent},
