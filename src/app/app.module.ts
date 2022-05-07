@@ -22,8 +22,8 @@ import { TestDescriptionBoxComponent } from './components/test-description-box/t
 import { TestResultsComponent } from './components/test-results/test-results.component';
 import { GlobalResultsComponent } from './components/global-results/global-results.component';
 import { SingleTestGlobalResultsComponent } from './components/single-test-global-results/single-test-global-results.component';
-import { LoginComponent } from './pages/auth/login/login/login.component';
-import { RegisterComponent } from './pages/auth/register/register/register.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
@@ -57,6 +57,8 @@ const appRoutes: Routes = [
     TestResultsComponent,
     GlobalResultsComponent,
     SingleTestGlobalResultsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
