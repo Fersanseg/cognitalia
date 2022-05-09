@@ -14,7 +14,8 @@ export class ButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick() { // Emits an event, to be caught by the button's parent component to call some function
+  onClick(e:any) { // Emits an event, to be caught by the button's parent component to call some function
+    e.preventDefault();
     this.buttonClick.emit();
   }
 

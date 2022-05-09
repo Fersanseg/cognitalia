@@ -1,18 +1,40 @@
 <div class="login">
     <h2 class="login__header">Accede a tu cuenta</h2>
-    <form>
+    <form #login="ngForm" (ngSubmit)="loginSubmit(login)">
         <div class="login__user">
             <label for="userLogin" class="login__label--user">Usuario</label>
-            <input type="email" id="userLogin" class="login__input--user">
+            <input 
+                email
+                [(ngModel)]="username" 
+                #userInput="ngModel"
+                name="userLogin" 
+                type="email" 
+                id="userLogin" 
+                class="login__input--user"
+                [class.invalid]="userInput.errors && userInput.errors['email']"
+                [class.valid]="userInput.value && userInput.value.length != 0 && !userInput.errors"
+                >
+        </div>
+        <div>
+            <span *ngIf="userInput.invalid && userInput.touched">
+                Email mal
+            </span> 
         </div>
         <div class="login__pw">
             <label for="passwordLogin" class="login__label--pw">Contraseña</label>
-            <input type="password" id="passwordLogin" class="login__input--pw">
+            <input 
+                [(ngModel)]="password" 
+                name="passwordLogin" 
+                type="password" 
+                id="passwordLogin" 
+                class="login__input--pw"
+            >
         </div>
 
-        <app-button
+        <button
+            type="submit"
             class="login__submit"
-            text="Acceder"
-        ></app-button>
+        >Acceder</button>
+        {{emailValidation}}
     </form>
 </div>
