@@ -76,6 +76,28 @@ INSERT INTO `cg_tests` (`id`, `title`, `subtitle`, `description`, `icon1`, `icon
 (4, 'Memoria visual', 'Recuerda un tablero cada vez más grande', '', './assets/table-cells-solid.svg', NULL, NULL),
 (5, 'Velocidad de escritura', 'Mide cuántas palabras puedes escribir por minuto', '', './assets/keyboard-solid.svg', NULL, NULL),
 (6, 'Test de Stroop', 'Comprueba si eres capaz de ignorar estímulos conflictivos', '', './assets/palette-solid.svg', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cg_users`
+--
+
+DROP TABLE IF EXISTS `cg_users`;
+CREATE TABLE IF NOT EXISTS `cg_users` (
+  `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `cg_users`
+--
+
+INSERT INTO `cg_users` (`id`, `email`, `password`) VALUES
+(1, 'usuario@prueba.com', '$argon2id$v=19$m=2048,t=50,p=3$dVFJOGYvdVJLUUVVbk11Ng$aiq5qMyjVzaNBWlEObgOojNcIkXUu+EXdsJvfEI65dI'),
+(2, 'fer_ssa94@hotmail.com', '$argon2id$v=19$m=2048,t=50,p=3$bjkudUxqWDJJNXVWNkx6Yg$5c2KlpyMIjecwfxh3YN0S/gcTKvQipGatn4DgVbG7BQ');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
