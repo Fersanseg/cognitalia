@@ -17,11 +17,6 @@ export class LoginComponent implements OnInit {
   }
 
   public submitCredentials(): void {
-    this.authService.login(this.username, this.password);
+    this.authService.login(this.username, this.password).subscribe();
   }
-
-  log(x:any) {
-    console.log(x);
-  }
-
 }

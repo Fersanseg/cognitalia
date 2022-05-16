@@ -10,8 +10,15 @@
         text="Empieza ahora"
     ></app-button>
 
-    <div class="userManagement">
-        <span class="userManagement--login" routerLink="acceso-usuario">Acceso usuario</span>
-        <span class="userManagement--register" routerLink="registro-usuario">Crear cuenta</span>
+    <div class="userManagement loggedIn" *ngIf="loggedIn$ | async as user; else notLoggedIn">
+        <span>Bienvenid@, {{user.username ?? user.email}}</span>
+        <span class="loggedIn--logout" (click)="logout()">Salir</span>
     </div>
+    <ng-template #notLoggedIn>
+        <div class="userManagement">
+            <span class="userManagement--login" routerLink="acceso-usuario">Acceso usuario</span>
+            <span class="userManagement--register" routerLink="registro-usuario">Crear cuenta</span>
+        </div>
+    </ng-template>
+    
 </header>
