@@ -1,1 +1,56 @@
-<p>register works!</p>
+<div class="register">
+    <h2 class="register__header">Crea tu nueva cuenta</h2>
+    <span class="register__loginLink">(O, si ya tienes cuenta, <span class="register__loginLink--link" routerLink="/acceso-usuario">accede a ella</span>)</span>
+    <form #register="ngForm" (ngSubmit)="signup()">
+        <div class="register__email">
+            <label for="emailRegister" class="register__label--email">Email</label>
+            <input 
+                email
+                [(ngModel)]="email" 
+                #emailInput="ngModel"
+                name="emailRegister" 
+                type="email" 
+                id="emailRegister" 
+                class="register__input--email"
+                [class.invalid]="emailInput.errors && emailInput.errors['email']"
+                [class.valid]="emailInput.value && emailInput.value.length != 0 && !emailInput.errors"
+                >
+        </div>
+        <div class="register__username">
+            <label for="usernameRegister" class="register__label--username">Nombre de usuario</label>
+            <input 
+                name="usernameRegister"
+                type="text"
+                id="usernameRegister"
+                class="register__input--username"
+            >
+        </div>
+        <div class="register__pwGroup">
+            <div class="register__pw">
+                <label for="passwordRegister1" class="register__label--pw">Contraseña</label>
+                <input 
+                    [(ngModel)]="password" 
+                    name="passwordRegister" 
+                    type="password" 
+                    id="passwordRegister1" 
+                    class="register__input--pw"
+                >
+            </div>
+            <div class="register__pw">
+                <label for="passwordRegister2" class="register__label--pw">Contraseña (otra vez)</label>
+                <input 
+                    [(ngModel)]="password" 
+                    name="passwordRegister" 
+                    type="password" 
+                    id="passwordRegister2" 
+                    class="register__input--pw"
+                >
+            </div>
+        </div>
+
+        <button
+            type="submit"
+            class="register__submit"
+        >Acceder</button>
+    </form>
+</div>

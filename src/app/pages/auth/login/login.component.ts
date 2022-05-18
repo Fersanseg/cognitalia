@@ -9,7 +9,6 @@ import { UserAuthService } from 'src/app/services/common/user-auth.service';
 export class LoginComponent implements OnInit {
   public username!:string;
   public password!:string;
-  public emailValidation!:boolean;
 
   constructor(private authService:UserAuthService) { }
 

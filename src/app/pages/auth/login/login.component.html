@@ -1,5 +1,6 @@
 <div class="login">
     <h2 class="login__header">Accede a tu cuenta</h2>
+    <span class="login__registerLink">(O, si ya tienes cuenta, <span class="login__registerLink--link" routerLink="/registro-usuario">accede a ella</span>)</span>
     <form #login="ngForm" (ngSubmit)="submitCredentials()">
         <div class="login__user">
             <label for="userLogin" class="login__label--user">Usuario</label>
@@ -14,11 +15,6 @@
                 [class.invalid]="userInput.errors && userInput.errors['email']"
                 [class.valid]="userInput.value && userInput.value.length != 0 && !userInput.errors"
                 >
-        </div>
-        <div>
-            <span *ngIf="userInput.invalid && userInput.touched">
-                Email mal
-            </span> 
         </div>
         <div class="login__pw">
             <label for="passwordLogin" class="login__label--pw">Contraseña</label>

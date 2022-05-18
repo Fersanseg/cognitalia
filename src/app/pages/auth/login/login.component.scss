@@ -7,13 +7,25 @@
     align-items: center;
     margin: 5rem auto;
     width: 50%;
-    min-height: 40rem;
+    // min-height: 40rem;
     background-color: $light-gray;
 
     &__header {
         display: flex;
         align-items: center;
         flex-grow: 1;
+        margin-top: 4rem;
+    }
+
+    &__registerLink {
+        margin-bottom: 2rem;
+        font-size: 1.4rem;
+
+        &--link {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 
     & form {
@@ -51,8 +63,6 @@
         background-color: transparent;
         border: 0;
         ////////////////////////// 
-        position: absolute;
-        bottom: 3rem;
         cursor: pointer;
         background-color: orange;
         padding: 1.5rem;
@@ -61,6 +71,7 @@
         font-weight: bold;
         letter-spacing: 0.1rem;
         transition: all 0.2s;
+        margin-bottom: 4rem;
 
         &:hover {
             transform: scale(1.05) translateY(-0.1rem);
