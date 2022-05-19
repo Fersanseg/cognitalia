@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserAuthService } from 'src/app/services/common/user-auth.service';
-import { ILoginToken } from 'src/app/utils/interfaces/ilogin-token';
+import { IAuthToken } from 'src/app/utils/interfaces/iauth-token';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import { ILoginToken } from 'src/app/utils/interfaces/ilogin-token';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public loggedIn$!:Observable<ILoginToken>;
+  public loggedIn$!:Observable<IAuthToken>;
   public logged!:boolean;
   public username!:string;
 

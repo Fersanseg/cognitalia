@@ -1,4 +1,4 @@
-export interface ILoginToken {
+export interface IAuthToken {
     "state":string,
     "token":string,
     "username"?:string,

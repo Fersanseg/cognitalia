@@ -19,10 +19,16 @@
         <div class="register__username">
             <label for="usernameRegister" class="register__label--username">Nombre de usuario</label>
             <input 
+                [(ngModel)]="username"
+                #usernameInput="ngModel"
                 name="usernameRegister"
                 type="text"
                 id="usernameRegister"
                 class="register__input--username"
+                (focus)="focus($event)"
+                (blur)="blur($event)"
+                [class.invalid]="usernameFocused && !usernameInput.value"
+                [class.valid]="usernameFocused && usernameInput.value && usernameInput.value.length != 0"
             >
         </div>
         <div class="register__pwGroup">
