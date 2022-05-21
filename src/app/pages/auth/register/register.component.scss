@@ -84,16 +84,23 @@
         transition: all 0.2s;
         margin-bottom: 4rem;
 
-        &:hover {
-            transform: scale(1.05) translateY(-0.1rem);
-            box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.226);
-            background-color: rgb(253, 175, 29);
+        &:not(:disabled) {
+            &:hover {
+                transform: scale(1.05) translateY(-0.1rem);
+                box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.226);
+                background-color: rgb(253, 175, 29);
+            }
+            
+            &:active {
+                transform: scale(1.05) translateY(0.2rem);
+                box-shadow: 0 0.2rem 0.5rem 0.1rem rgba(0, 0, 0, 0.226);
+                background-color: rgb(241, 158, 2);
+            }
         }
 
-        &:active {
-            transform: scale(1.05) translateY(0.2rem);
-            box-shadow: 0 0.2rem 0.5rem 0.1rem rgba(0, 0, 0, 0.226);
-            background-color: rgb(241, 158, 2);
+        &:disabled {
+            opacity: 50%;
+            cursor: not-allowed;
         }
     }
 }

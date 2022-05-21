@@ -11,7 +11,7 @@
     ></app-button>
 
     <div class="userManagement loggedIn" *ngIf="loggedIn$ | async as user; else notLoggedIn">
-        <span>Bienvenid@, {{user.username ?? user.email}}</span>
+        <span>Bienvenid@, {{user.username}}</span>
         <span class="loggedIn--logout" (click)="logout()">Salir</span>
     </div>
     <ng-template #notLoggedIn>

@@ -20,6 +20,7 @@
             <label for="passwordLogin" class="login__label--pw">Contraseña</label>
             <input 
                 [(ngModel)]="password" 
+                #pwInput="ngModel"
                 name="passwordLogin" 
                 type="password" 
                 id="passwordLogin" 
@@ -30,6 +31,7 @@
         <button
             type="submit"
             class="login__submit"
+            [disabled]="pwInput.pristine || userInput.pristine"
         >Acceder</button>
     </form>
 </div>

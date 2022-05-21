@@ -11,7 +11,7 @@ $submittedCredentials = json_decode(file_get_contents("php://input"));
 $submittedEmail = $submittedCredentials->user;
 $submittedPassword = $submittedCredentials->password;
 
-$query = "SELECT id, email, password FROM cg_users WHERE email =:email";
+$query = "SELECT id, username, email, password FROM cg_users WHERE email =:email";
 $sql = $dbConnection->prepare($query);
 $sql->bindParam(':email', $submittedEmail);
 $sql->execute();
@@ -19,6 +19,7 @@ $sql->execute();
 $row = $sql->fetch(PDO::FETCH_ASSOC);
 if ($row) {
     $id = $row["id"];
+    $userUsername = $row["username"];
     $userEmail = $row["email"];
     $fetchedPassword = $row["password"];
 
@@ -48,6 +49,7 @@ if ($row) {
         echo json_encode([
             "state" => "success",
             "token" => $jwt,
+            "username" => $userUsername,
             "email" => $userEmail,
             "expires" => $expiresAt
         ]);

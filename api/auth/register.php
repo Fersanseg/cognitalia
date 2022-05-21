@@ -69,6 +69,7 @@ if (!$row) {
                 echo json_encode([
                     "state" => "success",
                     "token" => $jwt,
+                    "username" => $userUsername,
                     "email" => $userEmail,
                     "expires" => $expiresAt
                 ]);

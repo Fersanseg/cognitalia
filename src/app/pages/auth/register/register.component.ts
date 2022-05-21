@@ -28,7 +28,7 @@ export class RegisterComponent {
             this.account_exists = true;
             break;
           case ("success"):
-            alert("Bienvenid@, "+(res.username ? res.username : res.email));
+            alert("Bienvenid@, "+(res.username));
             this.router.navigate(["/"]);
           break;
         }

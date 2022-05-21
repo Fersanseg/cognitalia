@@ -37,6 +37,7 @@
                 <label for="passwordRegister1" class="register__label--pw">Contraseña</label>
                 <input 
                     [(ngModel)]="password1" 
+                    #pwInput1="ngModel"
                     name="passwordRegister" 
                     type="password" 
                     id="passwordRegister1" 
@@ -47,6 +48,7 @@
                 <label for="passwordRegister2" class="register__label--pw">Contraseña (otra vez)</label>
                 <input 
                     [(ngModel)]="password2" 
+                    #pwInput2="ngModel"
                     name="passwordRegister" 
                     type="password" 
                     id="passwordRegister2" 
@@ -58,6 +60,7 @@
         <button
             type="submit"
             class="register__submit"
+            [disabled]="emailInput.pristine || usernameInput.pristine || pwInput1.pristine || pwInput2.pristine"
         >Acceder</button>
     </form>
 </div>
