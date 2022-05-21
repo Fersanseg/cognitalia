@@ -10,7 +10,8 @@ import { UserAuthService } from 'src/app/services/common/user-auth.service';
 export class RegisterComponent {
   public email!:string;
   public username!:string;
-  public password!:string;
+  public password1!:string;
+  public password2!:string;
   public usernameFocused:boolean = false;
 
   constructor(private authService:UserAuthService, private router:Router) { }
@@ -19,10 +20,14 @@ export class RegisterComponent {
   }*/
 
   public signup(): void {
-    this.authService.register(this.username, this.email, this.password).subscribe(res => {
-      alert("Bienvenid@, "+(res.username ? res.username : res.email));
-      this.router.navigate(["/"]);
-    })
+    if (this.validatePasswords()) {
+      this.authService.register(this.username, this.email, this.password1).subscribe(res => {
+        alert("Bienvenid@, "+(res.username ? res.username : res.email));
+        this.router.navigate(["/"]);
+      })
+    } else {
+      alert("ERROR: Las contraseñas no coinciden");
+    }
   }
 
   public focus(e: any) {
@@ -32,12 +37,18 @@ export class RegisterComponent {
         break;
     }
   }
-
+//////////////////////////////////////////////////////
+// ALGO SE HA JODIDO EN EL PHP, ESTA DEVOLVIENDO FALLO
+//////////////////////////////////////////////////////
   public blur(e:any){
     switch (e.target.id) {
       case ("usernameRegister"):
         this.usernameFocused = false;
         break;
     }
+  }
+
+  private validatePasswords():boolean {
+    return this.password1 === this.password2 ? true : false;
   }
 }
