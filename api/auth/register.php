@@ -73,13 +73,13 @@ if (!$row) {
                     "expires" => $expiresAt
                 ]);
             } else {
-                echo json_encode(["state" => "failure verifying password"]);
+                echo json_encode(["state" => "failure"]);
             }
         } else {
-            echo json_encode(["state" => "failure on select query"]);
+            echo json_encode(["state" => "failure"]);
         }
     } else {
-        echo json_encode(["state" => "failure on insert query"]);
+        echo json_encode(["state" => "failure"]);
     }
 } else {
     echo json_encode(["state" => "acc_exists"]);

@@ -1,6 +1,7 @@
 <div class="register">
     <h2 class="register__header">Crea tu nueva cuenta</h2>
     <span class="register__loginLink">(O, si ya tienes cuenta, <span class="register__loginLink--link" routerLink="/acceso-usuario">accede a ella</span>)</span>
+    <div *ngIf="account_exists" class="accountExists">Esta cuenta ya existe</div>
     <form #register="ngForm" (ngSubmit)="signup()">
         <div class="register__email">
             <label for="emailRegister" class="register__label--email">Email</label>

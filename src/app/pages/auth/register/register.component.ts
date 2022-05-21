@@ -13,6 +13,7 @@ export class RegisterComponent {
   public password1!:string;
   public password2!:string;
   public usernameFocused:boolean = false;
+  public account_exists:boolean = false;
 
   constructor(private authService:UserAuthService, private router:Router) { }
 
@@ -22,8 +23,15 @@ export class RegisterComponent {
   public signup(): void {
     if (this.validatePasswords()) {
       this.authService.register(this.username, this.email, this.password1).subscribe(res => {
-        alert("Bienvenid@, "+(res.username ? res.username : res.email));
-        this.router.navigate(["/"]);
+        switch (res.state) {
+          case ("acc_exists"):
+            this.account_exists = true;
+            break;
+          case ("success"):
+            alert("Bienvenid@, "+(res.username ? res.username : res.email));
+            this.router.navigate(["/"]);
+          break;
+        }
       })
     } else {
       alert("ERROR: Las contraseñas no coinciden");
@@ -37,9 +45,7 @@ export class RegisterComponent {
         break;
     }
   }
-//////////////////////////////////////////////////////
-// ALGO SE HA JODIDO EN EL PHP, ESTA DEVOLVIENDO FALLO
-//////////////////////////////////////////////////////
+  
   public blur(e:any){
     switch (e.target.id) {
       case ("usernameRegister"):

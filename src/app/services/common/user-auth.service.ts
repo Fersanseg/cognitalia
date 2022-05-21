@@ -28,9 +28,10 @@ export class UserAuthService {
   public register(username:string, email:string, password:string):Observable<IAuthToken> {
     return this.http.post<IAuthToken>(`${this.authEndpoint}/register.php`, {username, email, password}).pipe(
       map(res => {
-        console.log(res);
-        localStorage.setItem("loggedInUser", JSON.stringify(res));
-        this.loggedInUserSubject.next(res);
+        if (res.state == "success") {
+          localStorage.setItem("loggedInUser", JSON.stringify(res));
+          this.loggedInUserSubject.next(res);
+        }
         return res;
       })
     )
