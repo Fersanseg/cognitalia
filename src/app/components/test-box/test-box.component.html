@@ -4,9 +4,10 @@
     <div class="testBox__icons">
         <div 
             class="testBox__icons--icon"
-            *ngFor="let icon of test.icon"
-        >
-            <img class="testBox__icons--icon--color" [src]="icon" style="height: 100%">
+            >
+            <img class="testBox__icons--icon--color" [src]="test.icon1 ? test.icon1 : null" style="height: 100%">
+            <img class="testBox__icons--icon--color" [src]="test.icon2 ? test.icon2 : null" style="height: 100%">
+            <img class="testBox__icons--icon--color" [src]="test.icon3 ? test.icon3 : null" style="height: 100%">
         </div>
     </div>
 </div>

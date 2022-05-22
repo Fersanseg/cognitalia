@@ -1,7 +1,7 @@
 <div class="register">
-    <h2 class="register__header">Crea tu nueva cuenta</h2>
-    <span class="register__loginLink">(O, si ya tienes cuenta, <span class="register__loginLink--link" routerLink="/acceso-usuario">accede a ella</span>)</span>
-    <div *ngIf="account_exists" class="accountExists">Esta cuenta ya existe</div>
+    <h2 class="register__header">Create a new account</h2>
+    <span class="register__loginLink">(Or, if you already own one, <span class="register__loginLink--link" routerLink="/acceso-usuario">sign up</span>)</span>
+    <div *ngIf="account_exists" class="accountExists">This account already exists</div>
     <form #register="ngForm" (ngSubmit)="signup()">
         <div class="register__email">
             <label for="emailRegister" class="register__label--email">Email</label>
@@ -18,7 +18,7 @@
                 >
         </div>
         <div class="register__username">
-            <label for="usernameRegister" class="register__label--username">Nombre de usuario</label>
+            <label for="usernameRegister" class="register__label--username">Username</label>
             <input 
                 [(ngModel)]="username"
                 #usernameInput="ngModel"
@@ -34,7 +34,7 @@
         </div>
         <div class="register__pwGroup">
             <div class="register__pw">
-                <label for="passwordRegister1" class="register__label--pw">Contraseña</label>
+                <label for="passwordRegister1" class="register__label--pw">Password</label>
                 <input 
                     [(ngModel)]="password1" 
                     #pwInput1="ngModel"
@@ -45,7 +45,7 @@
                 >
             </div>
             <div class="register__pw">
-                <label for="passwordRegister2" class="register__label--pw">Contraseña (otra vez)</label>
+                <label for="passwordRegister2" class="register__label--pw">Password (again)</label>
                 <input 
                     [(ngModel)]="password2" 
                     #pwInput2="ngModel"

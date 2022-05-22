@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faThList } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { DataStorageService } from 'src/app/services/common/data-storage.service';
 import { EventsService } from 'src/app/services/common/events.service';
 import { TestsService } from 'src/app/services/common/tests.service';
 import { MnumService } from 'src/app/services/memoria-numerica/mnum.service';
@@ -32,8 +30,8 @@ export class MemoriaNumericaComponent implements OnInit {
     this.testFinished.subscribe(s => {
       if(s) { // Bool: if test signals that it's finished, generate the results charts
         const correctAmt = this.mnumService.getResults();
-        this.results = "El número más largo que has podido recordar es de "+correctAmt+" cifras"; // Num memory results chart
-        this.testResult = {...this.testResult, score: correctAmt+" cifras"}; // Global results chart
+        this.results = "The longest number you could remember had "+correctAmt+" digits"; // Num memory results chart
+        this.testResult = {...this.testResult, score: correctAmt+" digits"}; // Global results chart
         this.testsService.updateResult(this.testResult).subscribe(r => this.eventsService.ResultsSaved.emit());
       }
     });

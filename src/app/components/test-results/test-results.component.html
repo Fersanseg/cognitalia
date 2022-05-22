@@ -1,10 +1,10 @@
 <div class="testResults">
-    <h1 class="testResults__heading">RESULTADOS</h1>
+    <h1 class="testResults__heading">RESULTS</h1>
     <span>{{responseTimes}}</span>
     <span *ngIf="averageTimes">{{averageTimes}}</span>
     <span>{{comparativeResults}}</span>
     <app-button
-        [text]="'¿Intentarlo de nuevo?'"
+        [text]="'Try again?'"
         (buttonClick)="cbk()"
     ></app-button>
 </div>

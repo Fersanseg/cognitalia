@@ -1,9 +1,9 @@
 <div class="login">
-    <h2 class="login__header">Accede a tu cuenta</h2>
-    <span class="login__registerLink">(O, si aún no tienes, <span class="login__registerLink--link" routerLink="/registro-usuario">regístrate</span>)</span>
+    <h2 class="login__header">Sign into your account</h2>
+    <span class="login__registerLink">(Or, if you don't already have one, <span class="login__registerLink--link" routerLink="/registro-usuario">sign up</span>)</span>
     <form #login="ngForm" (ngSubmit)="submitCredentials()">
         <div class="login__user">
-            <label for="userLogin" class="login__label--user">Usuario</label>
+            <label for="userLogin" class="login__label--user">Username</label>
             <input 
                 email
                 [(ngModel)]="username" 
@@ -17,7 +17,7 @@
                 >
         </div>
         <div class="login__pw">
-            <label for="passwordLogin" class="login__label--pw">Contraseña</label>
+            <label for="passwordLogin" class="login__label--pw">Password</label>
             <input 
                 [(ngModel)]="password" 
                 #pwInput="ngModel"
@@ -32,6 +32,6 @@
             type="submit"
             class="login__submit"
             [disabled]="pwInput.pristine || userInput.pristine"
-        >Acceder</button>
+        >Sign in</button>
     </form>
 </div>

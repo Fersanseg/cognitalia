@@ -17,27 +17,30 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.testsService.getTests().subscribe((t) => this.tests = t);  
+    this.testsService.getTests().subscribe((t) => {
+      // console.log(t);
+      this.tests = t
+    });  
   }
 
   onClick(pageUrl: string) {
     switch(pageUrl) {
-      case "Tiempo de reacción":
+      case "Reaction time":
         this.router.navigateByUrl("/tiempo-reaccion", {state: {descriptionOfTest: this.tests[0].description}});
         break;
-      case "Memoria numérica":
+      case "Number memory":
         this.router.navigateByUrl("/memoria-numerica", {state: {descriptionOfTest: this.tests[1].description}});
         break;
-      case "Memoria verbal":
+      case "Verbal memory":
         this.router.navigateByUrl("/memoria-verbal", {state: {descriptionOfTest: this.tests[2].description}});
         break;
-      case "Memoria visual":
+      case "Visual memory":
         this.router.navigateByUrl("/memoria-visual");
         break;
-      case "Velocidad de escritura":
+      case "Typing speed":
         this.router.navigateByUrl("/velocidad-escritura");
         break;
-      case "Test de Stroop":
+      case "Stroop test":
         this.router.navigateByUrl("/stroop");
         break;
       default: 

@@ -28,13 +28,13 @@ export class RegisterComponent {
             this.account_exists = true;
             break;
           case ("success"):
-            alert("Bienvenid@, "+(res.username));
+            alert("Welcome, "+(res.username));
             this.router.navigate(["/"]);
           break;
         }
       })
     } else {
-      alert("ERROR: Las contraseñas no coinciden");
+      alert("ERROR: Passwords aren't the same");
     }
   }
 

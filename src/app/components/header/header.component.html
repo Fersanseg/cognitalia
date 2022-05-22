@@ -4,20 +4,16 @@
     <a routerLink="/">
         <h1>Cognitalia</h1>
     </a>
-    <h3>Prueba varios juegos cognitivos y mide tus habilidades con el resto del mundo</h3>
-    <app-button
-        *ngIf="hasRoute('/')"
-        text="Empieza ahora"
-    ></app-button>
+    <h3>Play some cognitive games and compare your skills with the rest of the world</h3>
 
     <div class="userManagement loggedIn" *ngIf="loggedIn$ | async as user; else notLoggedIn">
-        <span>Bienvenid@, {{user.username}}</span>
-        <span class="loggedIn--logout" (click)="logout()">Salir</span>
+        <span>Welcome, {{user.username}}</span>
+        <span class="loggedIn--logout" (click)="logout()">Logout</span>
     </div>
     <ng-template #notLoggedIn>
         <div class="userManagement">
-            <span class="userManagement--login" routerLink="acceso-usuario">Acceso usuario</span>
-            <span class="userManagement--register" routerLink="registro-usuario">Crear cuenta</span>
+            <span class="userManagement--login" routerLink="acceso-usuario">Log in</span>
+            <span class="userManagement--register" routerLink="registro-usuario">Sign up</span>
         </div>
     </ng-template>
     

@@ -18,7 +18,7 @@ export class LoginComponent {
 
   public submitCredentials(): void {
     this.authService.login(this.username, this.password).subscribe(res => {
-      alert("Bienvenid@, "+(res.username));
+      alert("Welcome, "+(res.username));
       this.router.navigate(["/"]);
     });
   }

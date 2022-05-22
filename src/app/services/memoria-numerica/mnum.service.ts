@@ -15,7 +15,7 @@ export class MnumService {
   private currentNumber!:number;
 
   readonly initialHeading:IHeading = {
-    title: "Haz click en esta caja cuando quieras empezar el test",
+    title: "Click this box whenever you're ready to start",
     subtitle: ""
   };
   readonly initialState:string = "initState";
@@ -48,7 +48,7 @@ export class MnumService {
       // If current state is "initState", change to "waitingState"
       case "initState":
         this.stateSubject.next("waitingState");
-        const message = "Prepárate para memorizar el siguiente número...";
+        const message = "Get ready to memorize the next number...";
         let count:number = 3;
 
         this.waitingInterval(message, count);
@@ -58,7 +58,7 @@ export class MnumService {
       case "waitingState":
         this.stateSubject.next("memorizeState");
         this.headingSubject.next({
-          title: "Mira atentamente e intenta memorizar este número!",
+          title: "Try to memorize this number!",
           subtitle: this.currentNumber.toString()
         });
 
@@ -71,7 +71,7 @@ export class MnumService {
       case "memorizeState":
         this.stateSubject.next("answerState");
         this.headingSubject.next({
-          title: "¿Qué número era? Pulsa 'intro' para enviar tu respuesta",
+          title: "Which number was it? Press 'enter' to send your answer",
           subtitle: ""
         })
         break;
@@ -79,7 +79,7 @@ export class MnumService {
       // If current state is "answerState", validates answer and changes to "waitingState" if correct, or "endState" if wrong
       case "answerState":
         if (answer == this.currentNumber) {
-          const message = "¡Genial! A ver si aciertas el siguiente...";
+          const message = "Great! Let's see if you get the next one...";
           this.correctAnswersCount++;
           this.stateSubject.next("waitingState");
           let count:number = 3;
@@ -90,7 +90,7 @@ export class MnumService {
           this.testFinishedSubject.next(true);
           this.stateSubject.next("endState");
           this.headingSubject.next({
-            title: "¡Has fallado! El número era "+this.currentNumber.toString(),
+            title: "Wrong! The correct number was "+this.currentNumber.toString(),
             subtitle: ""
           });
         }

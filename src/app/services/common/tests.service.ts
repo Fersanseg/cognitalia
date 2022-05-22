@@ -15,11 +15,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TestsService {
-  private testsEndpoint = "http://localhost:5000/tests";
-  private resultsEndpoint = "http://localhost:5000/results";
+  private testsEndpoint = "http://localhost/cognitalia/api/tests";
+  private resultsEndpoint = "http://localhost/cognitalia/api/results";
   private cacheTests!:Observable<ITest[]>;
-  private cacheGlobalTestResults!:Observable<IGlobalResults[]>;
-  private cacheSingleTestResults!:Observable<IGlobalResults>;
 
   constructor(
     private http: HttpClient
@@ -32,8 +30,10 @@ export class TestsService {
    */
   public getTests(): Observable<ITest[]> {
     if(!this.cacheTests) {
-      this.cacheTests = this.http.get<ITest[]>(this.testsEndpoint).pipe(
-        map((res:ITest[]) => res),
+      this.cacheTests = this.http.get<ITest[]>(`${this.testsEndpoint}/get.php`).pipe(
+        map((res:ITest[]) => {
+          return res;
+        }),
         shareReplay(1)
       );
     }
@@ -46,7 +46,7 @@ export class TestsService {
    * @returns An observable that serves an array of IGlobalResults objects
    */
   public getAllGlobalResults(): Observable<IGlobalResults[]> {
-    return this.http.get<IGlobalResults[]>(this.resultsEndpoint).pipe(
+    return this.http.get<IGlobalResults[]>(`${this.resultsEndpoint}/get.php`).pipe(
       map((res:IGlobalResults[]) => res)
     );
   }
@@ -56,7 +56,7 @@ export class TestsService {
    * @returns An observable that serves an object of type IGlobalResults
    */
   public getSingleTestGlobalResults(testId:number): Observable<IGlobalResults> {
-    return this.http.get<IGlobalResults[]>(this.resultsEndpoint).pipe(
+    return this.http.get<IGlobalResults[]>(`${this.resultsEndpoint}/get.php?id=${testId}`).pipe(
       map((res:IGlobalResults[]) => res.filter(r => r.id == testId)[0]),
       shareReplay(1)
     );

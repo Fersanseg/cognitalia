@@ -15,8 +15,8 @@ export class TiempoReaccionComponent implements OnInit, OnDestroy {
   private testCountSubscription!:Subscription;
   private testResult!:IGlobalResults;
   private initialResults:IResults = {
-    responseTimes: "Tus resultados son: ",
-    averageTimes: "La media de tus resultados es: ",
+    responseTimes: "Your results are: ",
+    averageTimes: "Your average result is: ",
     comparativeResults: ""
   }
   

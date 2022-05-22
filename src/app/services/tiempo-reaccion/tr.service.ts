@@ -18,8 +18,8 @@ export class TrService {
   private responseTimes:number[] = []; // Saves the results of the response time test.
 
   readonly initialHeading:IHeading = {
-    title: "Haz click en esta caja cuando cambie de color rojo a verde.",
-    subtitle: "Haz click cuando quieras empezar la prueba."
+    title: "Click this box when it changes from red to green",
+    subtitle: "Click whenever you're ready to start"
   }
   readonly initialState:string = "initState";
 
@@ -58,25 +58,25 @@ export class TrService {
   public evaluateResults(avg:number):string {
     // VALUES ARE FOR TESTING PURPOSES: Refactor to db.json
     if(avg<220) {
-      return "Tu media es mejor que la del 97.5% de la población";
+      return "Your avergae is better than 97.5% of the population";
     } else if(avg<228) {
-      return "Tu media es mejor que la del 95% de la población";
+      return "Your avergae is better than 95% of the population";
     } else if(avg<235) {
-      return "Tu media es mejor que la del 90% de la población";
+      return "Your avergae is better than 90% of the population";
     } else if(avg<247) {
-      return "Tu media es mejor que la del 75% de la población";
+      return "Your avergae is better than 75% of the population";
     } else if(avg<259) {
-      return "Tu media es mejor que la del 50% de la población";
+      return "Your avergae is better than 50% of the population";
     } else if(avg<287) {
-      return "Tu media es mejor que la del 25% de la población";
+      return "Your avergae is better than 25% of the population";
     } else if(avg<311) {
-      return "Tu media es mejor que la del 10% de la población";
+      return "Your avergae is better than 10% of the population";
     } else if(avg<332) {
-      return "Tu media es mejor que la del 5% de la población";
+      return "Your avergae is better than 5% of the population";
     } else if(avg<342) {
-      return "Tu media es mejor que la del 2.5% de la población";
+      return "Your avergae is better than 2.5% of the population";
     } else {
-      return "Tu media es peor que la del 2.5% de la población";
+      return "Your avergae is worse than 2.5% of the population";
     }
   }
 
@@ -89,7 +89,7 @@ export class TrService {
 
           this.stateSubject.next("answerableState");
           this.headingSubject.next({
-            title: "¡AHORA!",
+            title: "NOW!",
             subtitle: ""
           })
         } else {
@@ -97,8 +97,8 @@ export class TrService {
 
           this.stateSubject.next("feedbackState");
           this.headingSubject.next({
-            title: "¡Demasiado rápido!",
-            subtitle: "Espera a que la caja se vuelva verde para hacer click. Vuelve a intentarlo."
+            title: "Too fast!",
+            subtitle: "Wait until the box turns green. Try again."
           })
         }
         break;
@@ -111,14 +111,14 @@ export class TrService {
         if(this.testCountSubject.value < 5) {
           this.stateSubject.next("feedbackState");
           this.headingSubject.next({
-            title: "Tiempo: "+(this.clickTime-this.startTime)+"ms",
-            subtitle: "Haz click para continuar."
+            title: "Time: "+(this.clickTime-this.startTime)+"ms",
+            subtitle: "Click again to continue."
           })
         } else {
           this.stateSubject.next("endState");
           this.headingSubject.next({
             title: "Tiempo: "+(this.clickTime-this.startTime)+"ms",
-            subtitle: "¡Ya has terminado! Gracias por participar. Comprueba tus resultados más abajo."
+            subtitle: "You're done! Thanks for participating. Check your results down below."
           })
         }
 
@@ -130,7 +130,7 @@ export class TrService {
         this.clickable = false;
         this.stateSubject.next("waitingState");
         this.headingSubject.next({
-          title: "Espera...",
+          title: "Wait...",
           subtitle: ""
         })
 
