@@ -58,25 +58,25 @@ export class TrService {
   public evaluateResults(avg:number):string {
     // VALUES ARE FOR TESTING PURPOSES: Refactor to db.json
     if(avg<220) {
-      return "Your avergae is better than 97.5% of the population";
+      return "Your average is better than 97.5% of the population";
     } else if(avg<228) {
-      return "Your avergae is better than 95% of the population";
+      return "Your average is better than 95% of the population";
     } else if(avg<235) {
-      return "Your avergae is better than 90% of the population";
+      return "Your average is better than 90% of the population";
     } else if(avg<247) {
-      return "Your avergae is better than 75% of the population";
+      return "Your average is better than 75% of the population";
     } else if(avg<259) {
-      return "Your avergae is better than 50% of the population";
+      return "Your average is better than 50% of the population";
     } else if(avg<287) {
-      return "Your avergae is better than 25% of the population";
+      return "Your average is better than 25% of the population";
     } else if(avg<311) {
-      return "Your avergae is better than 10% of the population";
+      return "Your average is better than 10% of the population";
     } else if(avg<332) {
-      return "Your avergae is better than 5% of the population";
+      return "Your average is better than 5% of the population";
     } else if(avg<342) {
-      return "Your avergae is better than 2.5% of the population";
+      return "Your average is better than 2.5% of the population";
     } else {
-      return "Your avergae is worse than 2.5% of the population";
+      return "Your average is worse than 2.5% of the population";
     }
   }
 

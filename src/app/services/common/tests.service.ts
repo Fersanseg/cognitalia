@@ -68,7 +68,7 @@ export class TestsService {
    * @returns An observable that serves an object of type IGlobalResults
    */
   public updateResult(test:IGlobalResults):Observable<IGlobalResults> {
-    const url = `${this.resultsEndpoint}/${test.id}`
+    const url = `${this.resultsEndpoint}/update.php`;
     return this.http.put<IGlobalResults>(url, test, httpOptions);
   }
 
