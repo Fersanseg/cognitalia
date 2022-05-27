@@ -18,9 +18,11 @@ export class UserAuthService {
   public login(user:string, password:string):Observable<IAuthToken> {    
     return this.http.post<IAuthToken>(`${this.authEndpoint}/login.php`, {user, password}).pipe(
       map(res => {
-        localStorage.setItem("loggedInUser", JSON.stringify(res));
-        this.loggedInUserSubject.next(res);
-        return res;
+        if(res.state == "success") {
+          localStorage.setItem("loggedInUser", JSON.stringify(res));
+          this.loggedInUserSubject.next(res);
+        }
+          return res;
       })
     )
   }

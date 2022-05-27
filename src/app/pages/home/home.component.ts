@@ -17,10 +17,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.testsService.getTests().subscribe((t) => {
-      // console.log(t);
-      this.tests = t
-    });  
+    this.testsService.getTests().subscribe((t) => {this.tests = t});  
   }
 
   onClick(pageUrl: string) {
