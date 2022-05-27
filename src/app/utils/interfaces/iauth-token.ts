@@ -3,5 +3,6 @@ export interface IAuthToken {
     "token":string,
     "username":string,
     "email":string,
-    "expires":number
+    "expires":number,
+    "additionalInfo"?:string
 }

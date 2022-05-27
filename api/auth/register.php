@@ -31,58 +31,54 @@ if (!$row) {
     $sql->bindParam(':password', $encodedPassword);
     
     if ($sql->execute()) {
+        // Fetch the newly inserted user from the database
         $query_select = "SELECT id, username, email, password FROM cg_users WHERE email =:email";
         $selectSql = $dbConnection->prepare($query_select);
         $selectSql->bindParam(':email', $submittedEmail);
         $selectSql->execute();
         
+        // Set up the JWT token
         $row = $selectSql->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            $id = $row["id"];
-            $userUsername = $row["username"];
-            $userEmail = $row["email"];
-            $fetchedPassword = $row["password"];
-            
-            if (password_verify($submittedPassword, $fetchedPassword)) {
-                $issuer = "localhost"; // The entity that issued the token (the website)
-                $audience = "loggedInUser"; // The recipient that will consume the token (the user)
-                $issuedAt = time(); // The time (seconds since Unix epoch) when the token was issued
-                $notBefore = $issuedAt; // The time after which the token can be accepted
-                $expiresAt = $issuedAt + 86400; // The time at which the token will expire
-                
-                $key = "verifiedLogin"; // Key for the JWT token
-                $payload = [ // The body of the JWT token
-                    'iss' => $issuer,
-                    'aud' => $audience,
-                    'iat' => $issuedAt,
-                    'nbf' => $notBefore,
-                    'exp' => $expiresAt,
-                    'data' => [
-                        'id' => $id,
-                        'userEmail' => $userEmail,
-                    ]
-                ];
+        $id = $row["id"];
+        $userUsername = $row["username"];
+        $userEmail = $row["email"];
+        $fetchedPassword = $row["password"];
         
-                $jwt = JWT::encode($payload, $key, 'HS256');
-                
-                // output
-                echo json_encode([
-                    "state" => "success",
-                    "token" => $jwt,
-                    "username" => $userUsername,
-                    "email" => $userEmail,
-                    "expires" => $expiresAt
-                ]);
-            } else {
-                echo json_encode(["state" => "failure"]);
-            }
-        } else {
-            echo json_encode(["state" => "failure"]);
-        }
+        $issuer = "localhost"; // The entity that issued the token (the website)
+        $audience = "loggedInUser"; // The recipient that will consume the token (the user)
+        $issuedAt = time(); // The time (seconds since Unix epoch) when the token was issued
+        $notBefore = $issuedAt; // The time after which the token can be accepted
+        $expiresAt = $issuedAt + 86400; // The time at which the token will expire
+        
+        $key = "verifiedLogin"; // Key for the JWT token
+        $payload = [ // The body of the JWT token
+            'iss' => $issuer,
+            'aud' => $audience,
+            'iat' => $issuedAt,
+            'nbf' => $notBefore,
+            'exp' => $expiresAt,
+            'data' => [
+                'id' => $id,
+                'userEmail' => $userEmail,
+            ]
+        ];
+
+        $jwt = JWT::encode($payload, $key, 'HS256');
+        
+        // Output
+        echo json_encode([
+            "state" => "success",
+            "token" => $jwt,
+            "username" => $userUsername,
+            "email" => $userEmail,
+            "expires" => $expiresAt
+        ]);
     } else {
-        echo json_encode(["state" => "failure"]);
+        echo json_encode(["state" => "failure", "additionalInfo" => "db_error"]);
+        return http_response_code(500); // Internal server error (the new user could not be inserted into the database)
     }
 } else {
-    echo json_encode(["state" => "acc_exists"]);
+    echo json_encode(["state" => "failure", "additionalInfo" => "acc_exists"]);
+    return http_response_code(401); // Unauthorized (submitted email already exists in the database)
 }
 ?>

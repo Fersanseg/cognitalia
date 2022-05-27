@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { IAuthToken } from 'src/app/utils/interfaces/iauth-token';
 
 @Injectable({
@@ -15,26 +15,20 @@ export class UserAuthService {
     this.loggedInUserSubject = new BehaviorSubject(Object.keys(isLogged).length == 0 ? false : isLogged);
   }
 
-  public login(user:string, password:string):Observable<IAuthToken> {    
-    return this.http.post<IAuthToken>(`${this.authEndpoint}/login.php`, {user, password}).pipe(
-      map(res => {
-        if(res.state == "success") {
-          localStorage.setItem("loggedInUser", JSON.stringify(res));
-          this.loggedInUserSubject.next(res);
-        }
-          return res;
-      })
-    )
+    public login(user:string, password:string):Observable<IAuthToken> {    
+      return this.http.post<IAuthToken>(`${this.authEndpoint}/login.php`, {user, password}).pipe(
+        tap(res => {
+          if (res.state == "success")
+            this.processSuccessfulAuth(res);
+        })
+      )
   }
 
   public register(username:string, email:string, password:string):Observable<IAuthToken> {
     return this.http.post<IAuthToken>(`${this.authEndpoint}/register.php`, {username, email, password}).pipe(
-      map(res => {
-        if (res.state == "success") {
-          localStorage.setItem("loggedInUser", JSON.stringify(res));
-          this.loggedInUserSubject.next(res);
-        }
-        return res;
+      tap(res => {
+        if (res.state == "success") 
+          this.processSuccessfulAuth(res);
       })
     )
   }
@@ -46,5 +40,10 @@ export class UserAuthService {
 
   public getUser(): Observable<IAuthToken> {
     return this.loggedInUserSubject.asObservable();
+  }
+
+  private processSuccessfulAuth(token:IAuthToken) {
+    localStorage.setItem("loggedInUser", JSON.stringify(token));
+    this.loggedInUserSubject.next(token);
   }
 }

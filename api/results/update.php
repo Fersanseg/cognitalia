@@ -17,8 +17,8 @@ $sql->bindParam(':score', $testScore);
 $sql->bindParam(':id', $testId);
 
 if ($sql->execute()) {
-    return http_response_code(204);
+    return http_response_code(204); // No content (request was successful)
 } else {
-    return http_response_code(422);
+    return http_response_code(422); // Unprocessable entity (there were errors in the query and it could not be executed)
 }
 ?>

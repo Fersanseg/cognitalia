@@ -51,12 +51,15 @@ if ($row) {
             "token" => $jwt,
             "username" => $userUsername,
             "email" => $userEmail,
-            "expires" => $expiresAt
+            "expires" => $expiresAt,
+            "additionalInfo" => ""
         ]);
     } else {
-        echo json_encode(["state" => "failure"]);
+        echo json_encode(["state" => "failure", "additionalInfo" => "pw_incorrect"]);
+        return http_response_code(401); // Unauthorized (user was found, but password is incorrect)
     }
 } else {
-    echo json_encode(["state" => "failure"]);
+    echo json_encode(["state" => "failure", "additionalInfo" => "user_notFound"]);
+    return http_response_code(401); // Unauthorized (user was not found in the database)
 }
 ?>
