@@ -1,8 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, merge, Observable, tap } from 'rxjs';
 import { IAuthToken } from 'src/app/utils/interfaces/iauth-token';
+import { IRefreshToken } from 'src/app/utils/interfaces/irefresh-token';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
+  
 @Injectable({
   providedIn: 'root'
 })
@@ -15,22 +22,46 @@ export class UserAuthService {
     this.loggedInUserSubject = new BehaviorSubject(Object.keys(isLogged).length == 0 ? false : isLogged);
   }
 
-    public login(user:string, password:string):Observable<IAuthToken> {    
-      return this.http.post<IAuthToken>(`${this.authEndpoint}/login.php`, {user, password}).pipe(
+    public login(user:string, password:string):Observable<any> {   
+      const user$ = this.http.post<IAuthToken>(`${this.authEndpoint}/login.php`, {user, password}).pipe(
         tap(res => {
           if (res.state == "success")
-            this.processSuccessfulAuth(res);
+            this.setUser(res);
         })
-      )
+      );
+
+      const refresh$ = this.refreshToken("generate").pipe(
+        tap(res => {
+          if(res.state == "success")
+            this.setRefreshToken(res);
+        })
+      );
+
+      const login$ = merge(user$, refresh$);
+      return login$;
   }
 
-  public register(username:string, email:string, password:string):Observable<IAuthToken> {
-    return this.http.post<IAuthToken>(`${this.authEndpoint}/register.php`, {username, email, password}).pipe(
+  public register(username:string, email:string, password:string):Observable<any> {
+    const user$ = this.http.post<IAuthToken>(`${this.authEndpoint}/register.php`, {username, email, password}).pipe(
       tap(res => {
         if (res.state == "success") 
-          this.processSuccessfulAuth(res);
+          this.setUser(res);
       })
-    )
+    );
+
+    const refresh$ = this.refreshToken("generate").pipe(
+      tap(res => {
+        if(res.state == "success")
+          this.setRefreshToken(res);
+      })
+    );
+
+    const register$ = merge(user$, refresh$);
+    return register$;
+  }
+
+  public refreshToken(action:string, token:string = ""):Observable<IRefreshToken> {
+    return this.http.post<IRefreshToken>(`${this.authEndpoint}/refresh.php`, {action:action, refreshToken:token}, httpOptions)
   }
 
   public logout(): void {
@@ -42,8 +73,21 @@ export class UserAuthService {
     return this.loggedInUserSubject.asObservable();
   }
 
-  private processSuccessfulAuth(token:IAuthToken) {
+  public getRefreshToken(): IRefreshToken {
+    const stringifiedToken = localStorage.getItem("refreshtoken");
+
+    return stringifiedToken ? JSON.parse(stringifiedToken) : {};
+  }
+
+  private setUser(token:IAuthToken):void {
     localStorage.setItem("loggedInUser", JSON.stringify(token));
     this.loggedInUserSubject.next(token);
+  }
+
+  private setRefreshToken(token:IRefreshToken):void {
+    if (localStorage.getItem("refreshToken"))
+      localStorage.removeItem("refreshToken");
+      
+    localStorage.setItem("refreshToken", JSON.stringify(token));
   }
 }

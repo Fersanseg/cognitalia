@@ -75,10 +75,8 @@ if (!$row) {
         ]);
     } else {
         echo json_encode(["state" => "failure", "additionalInfo" => "db_error"]);
-        return http_response_code(500); // Internal server error (the new user could not be inserted into the database)
     }
 } else {
     echo json_encode(["state" => "failure", "additionalInfo" => "acc_exists"]);
-    return http_response_code(401); // Unauthorized (submitted email already exists in the database)
 }
 ?>

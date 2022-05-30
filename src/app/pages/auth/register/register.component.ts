@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/services/common/user-auth.service';
+import { IAuthToken } from 'src/app/utils/interfaces/iauth-token';
 
 @Component({
   selector: 'app-register',
@@ -23,14 +24,10 @@ export class RegisterComponent {
   public signup(): void {
     if (this.validatePasswords()) {
       this.authService.register(this.username, this.email, this.password1).subscribe(res => {
-        switch (res.state) {
-          case ("acc_exists"):
-            this.account_exists = true;
-            break;
-          case ("success"):
-            alert("Welcome, "+(res.username));
-            this.router.navigate(["/"]);
-          break;
+        if(res.state == "success") {
+          this.processSuccessfulRegister(res);
+        } else if (res.state == "failure") {
+          this.processFailedRegister(res);
         }
       })
     } else {
@@ -50,6 +47,25 @@ export class RegisterComponent {
     switch (e.target.id) {
       case ("usernameRegister"):
         this.usernameFocused = false;
+        break;
+    }
+  }
+
+  private processSuccessfulRegister(token:IAuthToken):void {
+    alert("Welcome, "+(token.username));
+    this.router.navigate(["/"]);
+  }
+
+  private processFailedRegister(token:IAuthToken):void {
+    switch (token.additionalInfo) {
+      case "acc_exists":
+        alert("An account with this email already exists. Please log in instead, or if it's not you, try another email");
+        break;
+      case "db_error":
+        alert("There was an error in our database. Please try again later");
+        break;
+      default:
+        alert("An unexpected error occurred. Try again later, or inform the website admin if the error keeps happening");
         break;
     }
   }
