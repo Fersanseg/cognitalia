@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +25,8 @@ import { GlobalResultsComponent } from './components/global-results/global-resul
 import { SingleTestGlobalResultsComponent } from './components/single-test-global-results/single-test-global-results.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
+import { AuthInterceptorService } from './services/common/auth-interceptor.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
@@ -66,9 +68,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     FontAwesomeModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    JwtModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

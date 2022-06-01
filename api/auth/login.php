@@ -2,8 +2,7 @@
 require '../../vendor/autoload.php';
 require_once '../connection.php';
 require '../headers.php';
-
-use \Firebase\JWT\JWT; // https://github.com/firebase/php-jwt
+include '../tokenHandler.php';
 
 $dbConnection = connect();
 
@@ -28,25 +27,7 @@ if ($row) {
 
     if (password_verify($submittedPassword, $fetchedPassword)) {
         // Session token generation
-        $issuer = "localhost"; // The entity that issued the token (the website)
-        $audience = "loggedInUser"; // The recipient that will consume the token (the user)
-        $issuedAt = time(); // The time (seconds since Unix epoch) when the token was issued
-        $notBefore = $issuedAt; // The time after which the token can be accepted
-        $expiresAt = $issuedAt + 120; // The time at which the token will expire
-
-        $key = "verifiedLogin"; // Key for the JWT token
-        $payload = [ // The body of the JWT token
-            'iss' => $issuer,
-            'aud' => $audience,
-            'iat' => $issuedAt,
-            'nbf' => $notBefore,
-            'exp' => $expiresAt,
-            'data' => [
-                'id' => $id,
-                'userEmail' => $userEmail,
-            ]
-        ];
-        $jwt = JWT::encode($payload, $key, 'HS256');
+        $jwt = createJwtToken();
         
         // output
         echo json_encode([
@@ -55,7 +36,6 @@ if ($row) {
             "type" => "login",
             "username" => $userUsername,
             "email" => $userEmail,
-            "expires" => $expiresAt,
             "additionalInfo" => ""
         ]);
     } else {

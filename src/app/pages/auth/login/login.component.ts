@@ -19,7 +19,6 @@ export class LoginComponent {
 
   public submitCredentials(): void {
     this.authService.login(this.username, this.password).subscribe(res => {
-      console.log(res);
       if(res.state == "success") {
         this.processSuccessfulLogin(res)
       } else if (res.state == "failure") {

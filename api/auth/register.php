@@ -2,6 +2,7 @@
 require '../../vendor/autoload.php';
 require_once '../connection.php';
 require '../headers.php';
+include '../tokenHandler.php';
 
 use \Firebase\JWT\JWT;
 
@@ -43,35 +44,17 @@ if (!$row) {
         $userUsername = $row["username"];
         $userEmail = $row["email"];
         $fetchedPassword = $row["password"];
-        
-        $issuer = "localhost"; // The entity that issued the token (the website)
-        $audience = "loggedInUser"; // The recipient that will consume the token (the user)
-        $issuedAt = time(); // The time (seconds since Unix epoch) when the token was issued
-        $notBefore = $issuedAt; // The time after which the token can be accepted
-        $expiresAt = $issuedAt + 86400; // The time at which the token will expire
-        
-        $key = "verifiedLogin"; // Key for the JWT token
-        $payload = [ // The body of the JWT token
-            'iss' => $issuer,
-            'aud' => $audience,
-            'iat' => $issuedAt,
-            'nbf' => $notBefore,
-            'exp' => $expiresAt,
-            'data' => [
-                'id' => $id,
-                'userEmail' => $userEmail,
-            ]
-        ];
 
-        $jwt = JWT::encode($payload, $key, 'HS256');
+        $jwt = createJwtToken();
         
         // Output
         echo json_encode([
             "state" => "success",
             "token" => $jwt,
+            "type" => "login",
             "username" => $userUsername,
             "email" => $userEmail,
-            "expires" => $expiresAt
+            "additionalInfo" => ""
         ]);
     } else {
         echo json_encode(["state" => "failure", "additionalInfo" => "db_error"]);

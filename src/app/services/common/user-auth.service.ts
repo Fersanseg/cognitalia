@@ -32,8 +32,9 @@ export class UserAuthService {
 
       const refresh$ = this.refreshToken("generate").pipe(
         tap(res => {
-          if(res.state == "success")
+          if(res.state == "success") {
             this.setRefreshToken(res);
+          }
         })
       );
 
@@ -60,13 +61,14 @@ export class UserAuthService {
     return register$;
   }
 
-  public refreshToken(action:string, token:string = ""):Observable<IRefreshToken> {
-    return this.http.post<IRefreshToken>(`${this.authEndpoint}/refresh.php`, {action:action, refreshToken:token}, httpOptions)
+  public refreshToken(action:string, token:string = ""):Observable<IRefreshToken | IAuthToken> {
+    return this.http.post<IRefreshToken>(`${this.authEndpoint}/refresh.php`, {action:action, token:token}, httpOptions)
   }
 
   public logout(): void {
     this.loggedInUserSubject.next(false);
     localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("refreshToken");
   }
 
   public getUser(): Observable<IAuthToken> {
@@ -79,12 +81,12 @@ export class UserAuthService {
     return stringifiedToken ? JSON.parse(stringifiedToken) : {};
   }
 
-  private setUser(token:IAuthToken):void {
+  public setUser(token:IAuthToken):void {
     localStorage.setItem("loggedInUser", JSON.stringify(token));
     this.loggedInUserSubject.next(token);
   }
 
-  private setRefreshToken(token:IRefreshToken):void {
+  public setRefreshToken(token:IRefreshToken):void {
     if (localStorage.getItem("refreshToken"))
       localStorage.removeItem("refreshToken");
       
