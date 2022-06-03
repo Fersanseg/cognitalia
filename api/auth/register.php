@@ -4,8 +4,6 @@ require_once '../connection.php';
 require '../headers.php';
 include '../tokenHandler.php';
 
-use \Firebase\JWT\JWT;
-
 $dbConnection = connect();
 
 $submittedCredentials = json_decode(file_get_contents("php://input"));
@@ -53,7 +51,6 @@ if (!$row) {
             "token" => $jwt,
             "type" => "login",
             "username" => $userUsername,
-            "email" => $userEmail,
             "additionalInfo" => ""
         ]);
     } else {

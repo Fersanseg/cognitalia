@@ -28,5 +28,4 @@ export class HeaderComponent implements OnInit {
     alert("Come back soon!");
     this.authService.logout();
   }
-
 }

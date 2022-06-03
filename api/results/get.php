@@ -2,6 +2,7 @@
 require '../../vendor/autoload.php';
 require_once '../connection.php';
 require '../headers.php';
+include '../checkSessionToken.php';
 
 $dbConnection = connect();
 

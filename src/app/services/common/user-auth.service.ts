@@ -30,7 +30,7 @@ export class UserAuthService {
         })
       );
 
-      const refresh$ = this.refreshToken("generate").pipe(
+      const refresh$ = this.refreshToken().pipe(
         tap(res => {
           if(res.state == "success") {
             this.setRefreshToken(res);
@@ -50,7 +50,7 @@ export class UserAuthService {
       })
     );
 
-    const refresh$ = this.refreshToken("generate").pipe(
+    const refresh$ = this.refreshToken().pipe(
       tap(res => {
         if(res.state == "success")
           this.setRefreshToken(res);
@@ -61,8 +61,18 @@ export class UserAuthService {
     return register$;
   }
 
-  public refreshToken(action:string, token:string = ""):Observable<IRefreshToken | IAuthToken> {
-    return this.http.post<IRefreshToken>(`${this.authEndpoint}/refresh.php`, {action:action, token:token}, httpOptions)
+  public refreshToken():Observable<IRefreshToken | IAuthToken> {
+
+    return this.http.post<IRefreshToken>(`${this.authEndpoint}/refresh.php`, {action:"generate"}, httpOptions)
+  }
+
+  public refreshSessionToken(username:string = ""):Observable<IAuthToken> {
+    return this.http.post<IAuthToken>(`${this.authEndpoint}/refresh.php`, {action:"refresh", username:username}, httpOptions).pipe(
+      tap(res => {
+        if (res.state == "success")
+        console.log("NUEVO TOKEN RECIBIDO CON ÉXITO");
+      })
+    )
   }
 
   public logout(): void {
@@ -75,6 +85,12 @@ export class UserAuthService {
     return this.loggedInUserSubject.asObservable();
   }
 
+  public getSessionToken(): IAuthToken {
+    const stringifiedToken = localStorage.getItem("loggedInUser");
+
+    return stringifiedToken ? JSON.parse(stringifiedToken) : {};
+  }
+
   public getRefreshToken(): IRefreshToken {
     const stringifiedToken = localStorage.getItem("refreshtoken");
 
@@ -82,6 +98,9 @@ export class UserAuthService {
   }
 
   public setUser(token:IAuthToken):void {
+    if(localStorage.getItem("loggedInUser"))
+      localStorage.removeItem("loggedInUser");
+
     localStorage.setItem("loggedInUser", JSON.stringify(token));
     this.loggedInUserSubject.next(token);
   }

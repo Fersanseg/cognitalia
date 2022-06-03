@@ -7,7 +7,7 @@ use Firebase\JWT\JWT; // https://github.com/firebase/php-jwt
 define('SECRET_KEY', 'xFHCS5KigKejvbfm4nfOOTTqwsT8G7T4c7UFwJag');
 
 function createJwtToken() {
-    return createToken(600);
+    return createToken(5);
 }
 
 function createRefreshToken() {

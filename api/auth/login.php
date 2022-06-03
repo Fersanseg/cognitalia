@@ -7,9 +7,6 @@ include '../tokenHandler.php';
 $dbConnection = connect();
 
 $submittedCredentials = json_decode(file_get_contents("php://input"));
-
-// $submittedEmail = "usuario@prueba.com";
-// $submittedPassword = 1234;
 $submittedPassword = $submittedCredentials->password;
 $submittedEmail = $submittedCredentials->user;
 
@@ -35,7 +32,6 @@ if ($row) {
             "token" => $jwt,
             "type" => "login",
             "username" => $userUsername,
-            "email" => $userEmail,
             "additionalInfo" => ""
         ]);
     } else {
