@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ChildrenOutletContexts, NavigationEnd, Router } from '@angular/router';
 import { DataStorageService } from './services/common/data-storage.service';
+import { slideInAnimation } from './utils/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [slideInAnimation]
 })
 export class AppComponent {
   title = 'cognitalia';
 
   constructor(
     public router: Router,
-    private dataStorageService:DataStorageService
+    private dataStorageService:DataStorageService,
+    private context:ChildrenOutletContexts
   ) {
     this.clearBrowserStorage();
   }
@@ -26,5 +29,9 @@ export class AppComponent {
         }
       }
     })
+  }
+
+  public getRouteAnimationData() {
+    return this.context.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
 }

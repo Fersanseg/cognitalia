@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -27,17 +28,18 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { AuthInterceptorService } from './services/common/auth-interceptor.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ConstructionComponent } from './pages/construction/construction.component';
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
-  {path: "acceso-usuario", component: LoginComponent},
-  {path: "registro-usuario", component: RegisterComponent},
-  {path: "tiempo-reaccion", component: TiempoReaccionComponent},
-  {path: "memoria-numerica", component: MemoriaNumericaComponent},
-  {path: "memoria-verbal", component: MemoriaVerbalComponent},
-  {path: "memoria-visual", component: MemoriaVisualComponent},
-  {path: "velocidad-escritura", component: VelocidadEscrituraComponent},
-  {path: "stroop", component: StroopComponent},
+  {path: "acceso-usuario", component: LoginComponent, data: { animation: 'LoginPage' }},
+  {path: "registro-usuario", component: RegisterComponent, data: { animation: 'RegisterPage' }},
+  {path: "tiempo-reaccion", component: TiempoReaccionComponent, data: { animation: 'ReactionTimePage' }},
+  {path: "memoria-numerica", component: MemoriaNumericaComponent, data: { animation: 'NumberMemoryPage' }},
+  {path: "memoria-verbal", component: ConstructionComponent, data: { animation: 'VerbalMemoryPage' }},
+  {path: "memoria-visual", component: ConstructionComponent, data: { animation: 'VisualMemoryPage' }},
+  {path: "velocidad-escritura", component: ConstructionComponent, data: { animation: 'TypingSpeedPage' }},
+  {path: "stroop", component: ConstructionComponent, data: { animation: 'StroopPage' }},
 ]
 
 @NgModule({
@@ -61,7 +63,8 @@ const appRoutes: Routes = [
     GlobalResultsComponent,
     SingleTestGlobalResultsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConstructionComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ const appRoutes: Routes = [
     FontAwesomeModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    JwtModule
+    JwtModule,
+    BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
