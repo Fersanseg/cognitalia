@@ -1,7 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import { BehaviorSubject, catchError, filter, map, Observable, retry, retryWhen, share, switchMap, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { IAuthToken } from 'src/app/utils/interfaces/iauth-token';
 import { UserAuthService } from './user-auth.service';
 
@@ -12,7 +11,8 @@ export class AuthInterceptorService implements HttpInterceptor {
   private refreshing:boolean = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authService:UserAuthService, private router:Router) { }
+  constructor(private authService:UserAuthService) { }
+  
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authRequest = req;
     const sessionToken = this.authService.getSessionToken();
@@ -41,7 +41,6 @@ export class AuthInterceptorService implements HttpInterceptor {
 
       if (token) {
         console.log("SE PIDE UN NUEVO TOKEN DE SESIÓN (nueva petición http: se va a interceptar y añadir token expirado a cabecera)")
-        // return this.authService.refreshSessionToken(JSON.stringify(token), token.username).pipe(
           return this.authService.refreshSessionToken(token.username).pipe(
             switchMap((token:any) => {
             this.refreshing = false;
@@ -55,7 +54,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           }),
           catchError(err => {
             this.refreshing = false;
-            console.log("ERROR RARO HANDLE401");
             return throwError(() => err);
           })
         )

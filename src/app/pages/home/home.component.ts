@@ -11,14 +11,15 @@ import { TestsService } from 'src/app/services/common/tests.service';
 export class HomeComponent implements OnInit {
   public tests: ITest[] = [];
 
+  ngOnInit(): void {
+    this.testsService.getTests().subscribe((t) => {this.tests = t});  
+  }
+  
   constructor(
     private testsService: TestsService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.testsService.getTests().subscribe((t) => {this.tests = t});  
-  }
 
   onClick(pageUrl: string) {
     switch(pageUrl) {

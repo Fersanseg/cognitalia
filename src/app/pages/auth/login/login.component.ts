@@ -19,7 +19,7 @@ export class LoginComponent {
 
   public submitCredentials(): void {
     this.authService.login(this.username, this.password).subscribe(res => {
-      if(res.state == "success") {
+      if(res.state == "success" && res.type == "login") {
         this.processSuccessfulLogin(res)
       } else if (res.state == "failure") {
         this.processFailedLogin(res);

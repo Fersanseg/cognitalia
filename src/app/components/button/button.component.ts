@@ -18,5 +18,4 @@ export class ButtonComponent implements OnInit {
     e.preventDefault();
     this.buttonClick.emit();
   }
-
 }

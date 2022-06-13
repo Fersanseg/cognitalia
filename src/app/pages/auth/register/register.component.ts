@@ -24,7 +24,7 @@ export class RegisterComponent {
   public signup(): void {
     if (this.validatePasswords()) {
       this.authService.register(this.username, this.email, this.password1).subscribe(res => {
-        if(res.state == "success") {
+        if(res.state == "success" && res.type == "login") {
           this.processSuccessfulRegister(res);
         } else if (res.state == "failure") {
           this.processFailedRegister(res);
