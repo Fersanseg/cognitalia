@@ -85,6 +85,7 @@ INSERT INTO `cg_tests` (`id`, `title`, `subtitle`, `description`, `icon1`, `icon
 DROP TABLE IF EXISTS `cg_users`;
 CREATE TABLE IF NOT EXISTS `cg_users` (
   `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
